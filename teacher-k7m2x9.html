@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8">
+<title>TOEIC ドリル 先生用</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#f2f4f9; --surface:#ffffff; --surface2:#f1f4fa; --line:#e2e7f0;
+  --ink:#121a33; --muted:#5e6984; --faint:#9aa3b8;
+  --navy:#16255a; --navy2:#2a47a8; --on-navy:#ffffff; --on-navy-muted:rgba(255,255,255,.72);
+  --accent:#ff6a3d; --accent-2:#ff9a3d; --accent-soft:#fff0e9;
+  --blue:#3c6df0; --blue-soft:#e8eefe;
+  --good:#12a06a; --good-soft:#e3f6ee; --bad:#e5484d; --bad-soft:#fdeceb; --warn:#e8930c; --warn-soft:#fdf3e1;
+  --shadow:0 1px 2px rgba(18,26,51,.04),0 8px 24px rgba(18,26,51,.06); --card-border:transparent;
+  --en:"Lexend",system-ui,-apple-system,sans-serif;
+  --ja:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --r:20px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#0b1020; --surface:#141b2f; --surface2:#1b2440; --line:#27314d;
+  --ink:#eef2fb; --muted:#a7b1ca; --faint:#6f7a96; --navy:#1a2a66; --navy2:#2d4cb5;
+  --accent:#ff7a4f; --accent-2:#ffab52; --accent-soft:#3a2219; --blue:#7c9dff; --blue-soft:#1f2b52;
+  --good:#3fd394; --good-soft:#123326; --bad:#ff7075; --bad-soft:#3a1a1d; --warn:#ffb547; --warn-soft:#382a12;
+  --shadow:none; --card-border:#232c46;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0b1020; --surface:#141b2f; --surface2:#1b2440; --line:#27314d;
+  --ink:#eef2fb; --muted:#a7b1ca; --faint:#6f7a96; --navy:#1a2a66; --navy2:#2d4cb5;
+  --accent:#ff7a4f; --accent-2:#ffab52; --accent-soft:#3a2219; --blue:#7c9dff; --blue-soft:#1f2b52;
+  --good:#3fd394; --good-soft:#123326; --bad:#ff7075; --bad-soft:#3a1a1d; --warn:#ffb547; --warn-soft:#382a12;
+  --shadow:none; --card-border:#232c46;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ja);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,textarea:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:720px;margin:0 auto;padding-inline:16px;padding-block:18px 48px}
+.en{font-family:var(--en)} .num{font-family:var(--en);font-variant-numeric:tabular-nums}
+h1,h2,h3{margin:0;line-height:1.3;font-weight:700;text-wrap:balance}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-family:var(--en);font-weight:500}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.card{background:var(--surface);border:1px solid var(--card-border);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.muted{color:var(--muted)} .small{font-size:13px}
+.hero{border-radius:26px;padding:20px;color:var(--on-navy);background:radial-gradient(120% 90% at 100% 0%,var(--navy2) 0%,transparent 60%),linear-gradient(160deg,var(--navy) 0%,#0f1a45 100%)}
+.hero .t{font-family:var(--en);font-weight:700;font-size:21px}
+.hero .s{font-size:13px;color:var(--on-navy-muted)}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.kpi{background:rgba(255,255,255,.1);border-radius:14px;padding:10px 12px}
+.kpi .v{font-family:var(--en);font-weight:600;font-size:24px;line-height:1.1}
+.kpi .k{font-size:11.5px;color:var(--on-navy-muted)}
+textarea.in{width:100%;min-height:92px;padding:12px 14px;border-radius:16px;border:1px solid var(--line);background:var(--surface2);color:var(--ink);font:inherit;font-family:var(--en);font-size:12.5px;resize:vertical}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:12px 16px;font-weight:700;min-height:48px}
+.btn.primary{border:0;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 6px 16px rgba(255,106,61,.28)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--muted);padding-inline:8px;font-weight:500;min-height:40px}
+.btn.danger{color:var(--bad);border-color:var(--bad)}
+.msg{font-size:13px;font-weight:700}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 13px;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.list{display:flex;flex-direction:column;gap:10px}
+.st{display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--card-border);box-shadow:var(--shadow);border-radius:var(--r);padding:14px 16px;text-align:left;width:100%}
+.st:hover{transform:translateY(-1px)}
+.av{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:700;flex:none;width:44px;height:44px;font-size:18px}
+.st .n{font-weight:700;font-size:16px}
+.st .d{font-size:12px;color:var(--muted)}
+.badge{display:inline-block;font-size:11px;font-weight:700;border-radius:8px;padding:1px 7px;margin-left:6px;vertical-align:2px}
+.b-bad{background:var(--bad-soft);color:var(--bad)} .b-warn{background:var(--warn-soft);color:var(--warn)} .b-good{background:var(--good-soft);color:var(--good)}
+.mini{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.mini .r{font-family:var(--en);font-weight:600;font-size:15px}
+.mini .bar{width:88px}
+.bar{height:8px;border-radius:99px;background:var(--surface2);overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:var(--surface2);border-radius:14px;padding:10px 12px}
+.stat .v{font-family:var(--en);font-weight:600;font-size:22px;line-height:1.1}
+.stat .v small{font-size:12px;color:var(--muted);font-weight:400}
+.stat .k{font-size:11.5px;color:var(--muted)}
+.week{display:grid;grid-template-columns:repeat(14,1fr);gap:4px;align-items:end;height:90px;margin-top:8px}
+.day{display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:3px}
+.day .col{width:100%;border-radius:5px 5px 3px 3px;background:var(--blue-soft);min-height:3px}
+.day .col.hit{background:var(--blue)}
+.day .wd{font-size:9.5px;color:var(--faint);font-family:var(--en)}
+.wp{display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;padding:8px 0;border-top:1px solid var(--line)}
+.wp:first-of-type{border-top:0}
+.wp .p{font-family:var(--en);font-weight:600}
+.words{display:flex;gap:6px;flex-wrap:wrap}
+.words span{font-family:var(--en);font-size:13px;background:var(--bad-soft);color:var(--bad);border-radius:8px;padding:2px 8px}
+.empty{text-align:center;padding:28px 16px;color:var(--muted)}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;margin:6px 2px -4px}
+.sec-h h3{font-size:16px}
+.sec-h span{font-size:12px;color:var(--muted)}
+.field{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.field:first-of-type{border-top:0}
+@keyframes pop{from{transform:translateY(6px);opacity:.4}to{transform:none;opacity:1}}
+.pop{animation:pop .22s ease-out}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<main class="wrap" id="app"></main>
+
+<script>
+const RK='toeic-admin-roster-v1';
+const DAY=864e5;
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const dkey=d=>{const z=new Date(d);return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0');};
+const COLORS=['#3c6df0','#ff6a3d','#12a06a','#8b5cf6','#e8930c','#e5484d','#0ea5b7'];
+const CATS=['品詞','動詞の形','前置詞・接続詞','代名詞・関係詞','語彙','比較・数量','慣用表現'];
+const CUR_BANDS=['まだ受けたことがない','〜395点','400〜495点','500〜595点','600〜695点','700点以上'];
+let R={}; try{ R=JSON.parse(localStorage.getItem(RK))||{}; }catch(e){}
+function save(){ try{ localStorage.setItem(RK,JSON.stringify(R)); }catch(e){} }
+let VIEW='list', SEL=null, FILTER='all';
+
+function decode(code){
+  const m=String(code).trim().match(/TD1\.([A-Za-z0-9_-]+)/); if(!m) return null;
+  try{ let b=m[1].replace(/-/g,'+').replace(/_/g,'/'); while(b.length%4) b+='=';
+    const o=JSON.parse(decodeURIComponent(escape(atob(b)))); return (o&&o.v===1&&o.id&&o.name)?o:null; }catch(e){ return null; }
+}
+function importCodes(text){
+  const found=text.match(/TD1\.[A-Za-z0-9_-]+/g)||[]; let ok=0, bad=0, names=[];
+  for(const c of found){ const o=decode(c); if(!o){ bad++; continue; }
+    const prev=R[o.id]; if(prev&&prev.t>o.t){ ok++; names.push(o.name+'（古いコードのため保持）'); continue; }
+    const hist=(prev&&prev.hist)||[]; hist.push({t:o.t,xp:o.xp,master:o.c.master,seen:o.seen}); if(hist.length>60) hist.splice(0,hist.length-60);
+    R[o.id]=Object.assign({},o,{hist,color:(prev&&prev.color)||COLORS[Object.keys(R).length%COLORS.length],imported:Date.now()}); ok++; names.push(o.name); }
+  save(); return {ok,bad,none:!found.length,names};
+}
+function lastStudy(s){ // 最後に学習した日（コード内の14日ログから）
+  for(let i=13;i>=0;i--){ const d=s.days[i]; if(d[0]+d[2]>0) return i; } return null; }
+function daysSinceStudy(s){ const i=lastStudy(s); if(i===null) return null; return Math.floor((Date.now()-s.t)/DAY)+(13-i); }
+function flag(s){
+  const d=daysSinceStudy(s); const sent=Math.floor((Date.now()-s.t)/DAY);
+  if(sent>=7) return {k:'warn',l:`報告が${sent}日前`};
+  if(d===null) return {k:'bad',l:'未着手'};
+  if(d>=3) return {k:'bad',l:`${d}日休み`};
+  const hit=s.days.slice(-7).filter(x=>x[0]+x[2]>=s.goal).length;
+  if(hit>=5) return {k:'good',l:'順調'};
+  return null;
+}
+function daysLeft(s){ if(!s.p||!s.p.testDate) return null; const d=Math.ceil((new Date(s.p.testDate+'T00:00:00')-new Date(dkey(Date.now())+'T00:00:00'))/DAY); return d>=0?d:null; }
+const av=(s,size=44)=>`<span class="av" style="width:${size}px;height:${size}px;font-size:${Math.round(size*.42)}px;background:${s.color}">${esc(s.name.slice(0,1))}</span>`;
+const pct=(a,b)=>b?Math.round(a/b*100):0;
+
+function render(){ ({list:renderList,detail:renderDetail})[VIEW](); window.scrollTo(0,0); }
+function renderList(){
+  const S=Object.values(R).sort((a,b)=>b.t-a.t);
+  const flags=S.map(flag);
+  const active=S.filter(s=>{const d=daysSinceStudy(s);return d!==null&&d<=1;}).length;
+  const warn=flags.filter(f=>f&&f.k!=='good').length;
+  const shown=S.filter((s,i)=>FILTER==='all'||(FILTER==='warn'&&flags[i]&&flags[i].k!=='good')||(FILTER==='good'&&flags[i]&&flags[i].k==='good'));
+  $('#app').innerHTML=`<div class="stack pop">
+    <section class="hero">
+      <div class="eyebrow" style="color:var(--on-navy-muted)">Teacher dashboard</div>
+      <div class="t">TOEIC ドリル 先生用</div>
+      <div class="s">生徒から届いた進捗コードを貼り付けると、ここに一覧が出ます。</div>
+      <div class="kpis"><div class="kpi"><div class="v">${S.length}</div><div class="k">生徒</div></div><div class="kpi"><div class="v">${active}</div><div class="k">昨日か今日に学習</div></div><div class="kpi"><div class="v" style="${warn?'color:#ffb3a7':''}">${warn}</div><div class="k">要フォロー</div></div></div>
+    </section>
+    <div class="card stack" style="gap:10px">
+      <b>進捗コードを取り込む</b>
+      <textarea class="in" id="codes" placeholder="TD1. から始まるコードを貼り付け（複数まとめてでも可）"></textarea>
+      <div class="row" style="justify-content:space-between"><button class="btn primary" id="imp">取り込む</button><span class="msg" id="impMsg"></span></div>
+    </div>
+    <div class="sec-h"><h3>生徒一覧</h3><span>報告が新しい順</span></div>
+    <div class="chips"><button class="chip" data-f="all" aria-pressed="${FILTER==='all'}">すべて ${S.length}</button><button class="chip" data-f="warn" aria-pressed="${FILTER==='warn'}">要フォロー ${warn}</button><button class="chip" data-f="good" aria-pressed="${FILTER==='good'}">順調 ${flags.filter(f=>f&&f.k==='good').length}</button></div>
+    <div class="list">${shown.length?shown.map(s=>{const f=flag(s), sent=Math.floor((Date.now()-s.t)/DAY), dl=daysLeft(s);
+      return `<button class="st" data-id="${esc(s.id)}">${av(s)}<div><div class="n">${esc(s.name)}${f?`<span class="badge b-${f.k}">${f.l}</span>`:''}</div><div class="d num">Lv ${s.lv} ・ ${s.streak}日連続 ・ 報告 ${sent===0?'今日':sent+'日前'}${dl!==null?` ・ 本番まで${dl}日`:''}</div></div>
+      <div class="mini"><span class="r" style="color:${s.rate==null?'var(--faint)':s.rate>=70?'var(--good)':'var(--bad)'}">${s.rate==null?'–':s.rate+'%'}</span><div class="bar"><i style="width:${pct(s.c.master,s.total)}%;background:var(--good)"></i><i style="width:${pct(s.c.learning,s.total)}%;background:var(--blue)"></i><i style="width:${pct(s.c.weak,s.total)}%;background:var(--bad)"></i></div><span class="small muted num" style="font-size:11px">定着 ${s.c.master}/${s.total}</span></div></button>`;}).join('')
+      :`<div class="card empty">${S.length?'この条件の生徒はいません。':'まだ生徒がいません。上の欄にコードを貼り付けてください。'}</div>`}</div>
+    <p class="small muted" style="margin:0">一覧はこの端末のブラウザに保存されます。「要フォロー」は、3日以上学習がない、まだ始めていない、報告が7日以上前のいずれかです。</p>
+  </div>`;
+  $('#imp').onclick=()=>{ const r=importCodes($('#codes').value); const m=$('#impMsg');
+    if(r.none){ m.style.color='var(--bad)'; m.textContent='コードが見つかりません。TD1. から始まる文字列を貼り付けてください。'; return; }
+    m.style.color=r.bad?'var(--warn)':'var(--good)'; m.textContent=`${r.ok}件を取り込みました${r.bad?`（${r.bad}件は読めませんでした）`:''}：${r.names.join('、')}`; $('#codes').value=''; setTimeout(render,900); };
+  document.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{FILTER=b.dataset.f; render();});
+  document.querySelectorAll('[data-id]').forEach(b=>b.onclick=()=>{SEL=b.dataset.id; VIEW='detail'; render();});
+}
+function renderDetail(){
+  const s=R[SEL]; if(!s){ VIEW='list'; return render(); }
+  const f=flag(s), dl=daysLeft(s), sent=Math.floor((Date.now()-s.t)/DAY);
+  const maxN=Math.max(s.goal,...s.days.map(d=>d[0]+d[2]))*1.1;
+  const hit7=s.days.slice(-7).filter(d=>d[0]+d[2]>=s.goal).length;
+  const tot14=s.days.reduce((a,d)=>a+d[0]+d[2],0), ok14=s.days.reduce((a,d)=>a+d[1],0), n14=s.days.reduce((a,d)=>a+d[0],0);
+  const cats=Object.entries(s.cat||{}).map(([c,[n,ok]])=>({c,n,ok,p:pct(ok,n)})).filter(x=>x.n>=3).sort((a,b)=>a.p-b.p);
+  const hist=(s.hist||[]).slice(-6);
+  const advice=[];
+  if(f&&f.k==='bad') advice.push(f.l==='未着手'?'まだ学習が始まっていません。最初の登録と「今日の学習」の使い方を一緒に確認するとよさそうです。':'学習が止まっています。1日5問でも続けるよう声をかけてください。');
+  if(s.rate!=null&&s.rate<60) advice.push('正答率が低めです。問題より先に単語カードで意味を固める期間を取ると効果的です。');
+  if(cats[0]&&cats[0].p<60) advice.push(`「${cats[0].c}」の正答率が${cats[0].p}%です。この出題ポイントを授業で扱うと伸びやすいです。`);
+  if(s.c.weak>=30) advice.push(`苦手な単語が${s.c.weak}語たまっています。「苦手な単語」モードでの復習を勧めてください。`);
+  if(dl!==null&&dl<=14&&s.c.weak>10) advice.push('本番が近いので、新しい単語より復習と弱点を優先させてください。');
+  if(!advice.length) advice.push('順調です。このペースを保てば定着が進みます。');
+  $('#app').innerHTML=`<div class="stack pop">
+    <div class="row" style="justify-content:space-between"><button class="btn ghost" id="back">← 一覧へ</button><button class="btn ghost small" id="del" style="color:var(--bad)">この生徒を削除</button></div>
+    <div class="card stack" style="gap:14px">
+      <div class="row" style="gap:12px">${av(s,56)}<div><h2 style="font-size:22px">${esc(s.name)}${f?`<span class="badge b-${f.k}">${f.l}</span>`:''}</h2><div class="small muted num">Lv ${s.lv} ・ ${s.xp} XP ・ 報告 ${sent===0?'今日':sent+'日前'}</div></div></div>
+      <div class="grid2">
+        <div class="stat"><div class="v">${s.rate==null?'–':s.rate+'<small>%</small>'}</div><div class="k">正答率（直近）</div></div>
+        <div class="stat"><div class="v">${s.streak}<small>日</small></div><div class="k">連続学習</div></div>
+        <div class="stat"><div class="v">${s.c.master}<small>/ ${s.total}</small></div><div class="k">定着した単語</div></div>
+        <div class="stat"><div class="v">${hit7}<small>/ 7日</small></div><div class="k">目標（${s.goal}問）達成日</div></div>
+      </div>
+      <div class="bar" style="height:10px"><i style="width:${pct(s.c.master,s.total)}%;background:var(--good)"></i><i style="width:${pct(s.c.learning,s.total)}%;background:var(--blue)"></i><i style="width:${pct(s.c.weak,s.total)}%;background:var(--bad)"></i></div>
+      <div class="small muted">定着 ${s.c.master} ・ 学習中 ${s.c.learning} ・ 苦手 ${s.c.weak} ・ 未学習 ${s.c.new}</div>
+    </div>
+    <div class="card">
+      <div class="row" style="justify-content:space-between"><h3 style="font-size:16px">この14日間</h3><span class="small muted num">${tot14}問 ・ 正答率 ${n14?pct(ok14,n14)+'%':'–'}</span></div>
+      <div class="week">${s.days.map((d,i)=>{const n=d[0]+d[2]; const dt=new Date(s.t-(13-i)*DAY); return `<div class="day" title="${dkey(dt)}: ${n}問"><div class="col ${n>=s.goal?'hit':''}" style="height:${n/maxN*70}px"></div><span class="wd">${dt.getDate()}</span></div>`;}).join('')}</div>
+      <div class="small muted" style="margin-top:6px">濃い青＝その日の目標を達成。数字は日付です。</div>
+    </div>
+    <div class="card stack" style="gap:8px">
+      <h3 style="font-size:16px">先生へのヒント</h3>
+      ${advice.map(a=>`<div class="small" style="padding-left:10px;border-left:3px solid var(--accent)">${esc(a)}</div>`).join('')}
+    </div>
+    <div class="card">
+      <div class="row" style="justify-content:space-between;margin-bottom:6px"><h3 style="font-size:16px">出題ポイント別の正答率</h3><span class="small muted">低い順</span></div>
+      ${cats.length?cats.map(r=>`<div class="wp"><div><b>${esc(r.c)}</b><div class="small muted num">${r.ok} / ${r.n} 問</div></div><span class="p" style="color:${r.p>=80?'var(--good)':r.p>=60?'var(--warn)':'var(--bad)'}">${r.p}%</span></div>`).join(''):'<div class="small muted">まだ問題演習のデータがありません。</div>'}
+    </div>
+    <div class="card stack" style="gap:8px">
+      <h3 style="font-size:16px">苦手な単語（上位）</h3>
+      ${s.weak&&s.weak.length?`<div class="words">${s.weak.map(w=>`<span>${esc(w)}</span>`).join('')}</div>`:'<div class="small muted">まだありません。</div>'}
+    </div>
+    <div class="card">
+      <h3 style="font-size:16px;margin-bottom:6px">目標と設定</h3>
+      <div class="field"><span>目標スコア</span><b class="num">${s.p&&s.p.target?s.p.target+'点':'未設定'}</b></div>
+      <div class="field"><span>今のスコア</span><b>${s.p&&s.p.cur!=null?CUR_BANDS[s.p.cur]:'未設定'}</b></div>
+      <div class="field"><span>次に受ける日</span><b class="num">${s.p&&s.p.testDate?`${s.p.testDate}（あと${dl!==null?dl:'–'}日）`:'未設定'}</b></div>
+      <div class="field"><span>1日に使える時間</span><b class="num">${s.p&&s.p.minutes?s.p.minutes+'分':'未設定'}</b></div>
+      <div class="field"><span>公式12 Test1 の類題</span><b class="num">${s.drills?`${s.drills[0]} / ${s.drills[1]} 問に挑戦`:'–'}</b></div>
+    </div>
+    ${hist.length>1?`<div class="card"><h3 style="font-size:16px;margin-bottom:6px">報告の推移</h3>${hist.map(h=>`<div class="field"><span class="num">${dkey(h.t)}</span><span class="num small muted">定着 ${h.master}語 ・ 学習済み ${h.seen}語 ・ ${h.xp} XP</span></div>`).join('')}</div>`:''}
+  </div>`;
+  $('#back').onclick=()=>{VIEW='list'; render();};
+  $('#del').onclick=()=>{ const b=$('#del'); if(b.dataset.c){ delete R[s.id]; save(); VIEW='list'; render(); } else { b.dataset.c='1'; b.textContent='本当に削除する（元に戻せません）'; } };
+}
+render();
+</script>
+
+</html>
