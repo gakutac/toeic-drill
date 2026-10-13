@@ -105,7 +105,8 @@ textarea.in{width:100%;min-height:92px;padding:12px 14px;border-radius:16px;bord
 <main class="wrap" id="app"></main>
 
 <script>
-const RK='toeic-admin-roster-v1';
+const APP={"title": "TOEIC ドリル 先生用", "key": "toeic-drill"};
+const RK=APP.key+'-admin-roster-v1';
 const DAY=864e5;
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -156,7 +157,7 @@ function renderList(){
   $('#app').innerHTML=`<div class="stack pop">
     <section class="hero">
       <div class="eyebrow" style="color:var(--on-navy-muted)">Teacher dashboard</div>
-      <div class="t">TOEIC ドリル 先生用</div>
+      <div class="t">${esc(APP.title)}</div>
       <div class="s">生徒から届いた進捗コードを貼り付けると、ここに一覧が出ます。</div>
       <div class="kpis"><div class="kpi"><div class="v">${S.length}</div><div class="k">生徒</div></div><div class="kpi"><div class="v">${active}</div><div class="k">昨日か今日に学習</div></div><div class="kpi"><div class="v" style="${warn?'color:#ffb3a7':''}">${warn}</div><div class="k">要フォロー</div></div></div>
     </section>
@@ -226,11 +227,11 @@ function renderDetail(){
     </div>
     <div class="card">
       <h3 style="font-size:16px;margin-bottom:6px">目標と設定</h3>
-      <div class="field"><span>目標スコア</span><b class="num">${s.p&&s.p.target?s.p.target+'点':'未設定'}</b></div>
-      <div class="field"><span>今のスコア</span><b>${s.p&&s.p.cur!=null?CUR_BANDS[s.p.cur]:'未設定'}</b></div>
+      ${s.p&&s.p.target?`<div class="field"><span>目標スコア</span><b class="num">${s.p.target}点</b></div>`:''}
+      ${s.p&&s.p.cur!=null?`<div class="field"><span>今のスコア</span><b>${CUR_BANDS[s.p.cur]}</b></div>`:''}
       <div class="field"><span>次に受ける日</span><b class="num">${s.p&&s.p.testDate?`${s.p.testDate}（あと${dl!==null?dl:'–'}日）`:'未設定'}</b></div>
       <div class="field"><span>1日に使える時間</span><b class="num">${s.p&&s.p.minutes?s.p.minutes+'分':'未設定'}</b></div>
-      <div class="field"><span>公式12 Test1 の類題</span><b class="num">${s.drills?`${s.drills[0]} / ${s.drills[1]} 問に挑戦`:'–'}</b></div>
+      ${s.drills&&s.drills[1]?`<div class="field"><span>公式12 Test1 の類題</span><b class="num">${s.drills[0]} / ${s.drills[1]} 問に挑戦</b></div>`:''}
     </div>
     ${hist.length>1?`<div class="card"><h3 style="font-size:16px;margin-bottom:6px">報告の推移</h3>${hist.map(h=>`<div class="field"><span class="num">${dkey(h.t)}</span><span class="num small muted">定着 ${h.master}語 ・ 学習済み ${h.seen}語 ・ ${h.xp} XP</span></div>`).join('')}</div>`:''}
   </div>`;

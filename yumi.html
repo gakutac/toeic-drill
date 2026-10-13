@@ -1,0 +1,1057 @@
+<!doctype html>
+<html lang="ja"><meta charset="utf-8">
+<title>有美さんの単語帳</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap">
+<style>
+:root{
+  --bg:#f2f4f9; --surface:#ffffff; --surface2:#f1f4fa; --line:#e2e7f0;
+  --ink:#121a33; --muted:#5e6984; --faint:#9aa3b8;
+  --navy:#16255a; --navy2:#2a47a8; --on-navy:#ffffff; --on-navy-muted:rgba(255,255,255,.72); --ring-track:rgba(255,255,255,.16);
+  --accent:#ff6a3d; --accent-2:#ff9a3d; --accent-soft:#fff0e9; --accent-ink:#ffffff;
+  --blue:#3c6df0; --blue-soft:#e8eefe;
+  --good:#12a06a; --good-soft:#e3f6ee; --bad:#e5484d; --bad-soft:#fdeceb; --warn:#e8930c; --warn-soft:#fdf3e1;
+  --shadow:0 1px 2px rgba(18,26,51,.04),0 8px 24px rgba(18,26,51,.06);
+  --card-border:transparent;
+  --en:"Lexend",system-ui,-apple-system,sans-serif;
+  --ja:"Zen Maru Gothic","Hiragino Maru Gothic ProN","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --nav-h:66px; --r:20px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#0b1020; --surface:#141b2f; --surface2:#1b2440; --line:#27314d;
+  --ink:#eef2fb; --muted:#a7b1ca; --faint:#6f7a96;
+  --navy:#1a2a66; --navy2:#2d4cb5;
+  --accent:#ff7a4f; --accent-2:#ffab52; --accent-soft:#3a2219; --accent-ink:#1a0d07;
+  --blue:#7c9dff; --blue-soft:#1f2b52;
+  --good:#3fd394; --good-soft:#123326; --bad:#ff7075; --bad-soft:#3a1a1d; --warn:#ffb547; --warn-soft:#382a12;
+  --shadow:none; --card-border:#232c46;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0b1020; --surface:#141b2f; --surface2:#1b2440; --line:#27314d;
+  --ink:#eef2fb; --muted:#a7b1ca; --faint:#6f7a96;
+  --navy:#1a2a66; --navy2:#2d4cb5;
+  --accent:#ff7a4f; --accent-2:#ffab52; --accent-soft:#3a2219; --accent-ink:#1a0d07;
+  --blue:#7c9dff; --blue-soft:#1f2b52;
+  --good:#3fd394; --good-soft:#123326; --bad:#ff7075; --bad-soft:#3a1a1d; --warn:#ffb547; --warn-soft:#382a12;
+  --shadow:none; --card-border:#232c46;
+}
+*{box-sizing:border-box}
+html,body{min-height:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--ja);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.wrap{max-width:600px;margin:0 auto;padding-inline:16px;padding-block:18px calc(var(--nav-h) + 36px + env(safe-area-inset-bottom,0px))}
+.en{font-family:var(--en)}
+.num{font-family:var(--en);font-variant-numeric:tabular-nums}
+h1,h2,h3{margin:0;text-wrap:balance;line-height:1.3;font-weight:700}
+h2{font-size:22px}
+.eyebrow{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-family:var(--en);font-weight:500}
+.stack{display:flex;flex-direction:column;gap:16px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.card{background:var(--surface);border:1px solid var(--card-border);border-radius:var(--r);padding:18px;box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.sec-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:6px 2px -4px}
+.sec-h h3{font-size:16px}
+.sec-h span{font-size:12px;color:var(--muted)}
+
+/* ---------- hero ---------- */
+.hero{position:relative;overflow:hidden;border-radius:26px;padding:20px 20px 18px;color:var(--on-navy);
+  background:radial-gradient(120% 90% at 100% 0%,var(--navy2) 0%,transparent 60%),linear-gradient(160deg,var(--navy) 0%,#0f1a45 100%)}
+.hero::after{content:"";position:absolute;right:-40px;bottom:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(255,106,61,.28),transparent 70%);pointer-events:none}
+.hero-top{display:flex;justify-content:space-between;align-items:center;gap:8px;position:relative;z-index:1}
+.hello{font-size:13px;color:var(--on-navy-muted)}
+.hello b{display:block;color:var(--on-navy);font-size:17px;font-weight:700;line-height:1.35}
+.pills{display:flex;gap:6px}
+.pill{display:inline-flex;align-items:center;gap:4px;height:28px;padding:0 10px;border-radius:99px;background:rgba(255,255,255,.12);font-family:var(--en);font-weight:600;font-size:13px;color:var(--on-navy);white-space:nowrap}
+.pill svg{width:15px;height:15px}
+.pill.fire svg{color:var(--accent-2)}
+.hero-body{display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:center;margin-top:16px;position:relative;z-index:1}
+.ring{position:relative;flex:none}
+.ring svg{display:block;transform:rotate(-90deg)}
+.ring .in{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.1}
+.ring .v{font-family:var(--en);font-weight:600;font-variant-numeric:tabular-nums}
+.ring .l{font-size:11px;opacity:.75;margin-top:4px}
+.ring circle{transition:stroke-dashoffset .9s cubic-bezier(.2,.8,.2,1)}
+.kpis{display:flex;flex-direction:column;gap:10px}
+.kpi{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.12)}
+.kpi:last-child{border-bottom:0;padding-bottom:0}
+.kpi .k{font-size:12px;color:var(--on-navy-muted)}
+.kpi .v{font-family:var(--en);font-weight:600;font-size:18px;font-variant-numeric:tabular-nums}
+.kpi .v small{font-size:12px;font-weight:400;opacity:.7;margin-left:2px}
+.hero-msg{position:relative;z-index:1;margin-top:14px;font-size:13.5px;color:var(--on-navy-muted)}
+.hero-msg b{color:var(--on-navy)}
+.lvbar{position:relative;z-index:1;margin-top:12px;display:flex;align-items:center;gap:10px;font-size:11.5px;color:var(--on-navy-muted)}
+.lvbar .track{flex:1;height:6px;border-radius:99px;background:var(--ring-track);overflow:hidden}
+.lvbar .track i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
+.cta{position:relative;z-index:1;margin-top:16px;width:100%;display:flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:16px;min-height:52px;font-weight:700;font-size:16px;color:#fff;
+  background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 8px 20px rgba(255,106,61,.35);transition:transform .15s}
+.cta:active{transform:scale(.98)}
+.cta svg{width:18px;height:18px}
+
+/* ---------- today menu ---------- */
+.menu{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--card-border);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+.mi{display:grid;grid-template-columns:44px 1fr auto 16px;gap:12px;align-items:center;padding:14px 16px;border:0;background:none;text-align:left;border-top:1px solid var(--line);width:100%}
+.mi:first-child{border-top:0}
+.mi:hover{background:var(--surface2)}
+.mi[disabled]{opacity:.5;cursor:default}
+.ico{width:44px;height:44px;border-radius:14px;display:flex;align-items:center;justify-content:center;background:var(--c-soft,var(--blue-soft));color:var(--c,var(--blue))}
+.ico svg{width:22px;height:22px}
+.mi .t{font-weight:700;font-size:15px;line-height:1.35}
+.mi .d{font-size:12px;color:var(--muted);line-height:1.45}
+.mi .cnt{font-family:var(--en);font-weight:600;font-size:13px;padding:3px 10px;border-radius:99px;background:var(--c-soft,var(--surface2));color:var(--c,var(--muted));white-space:nowrap}
+.mi .cnt.done{background:var(--good-soft);color:var(--good)}
+.chev{color:var(--faint);width:16px;height:16px}
+
+/* ---------- week chart ---------- */
+.week{display:grid;grid-template-columns:repeat(7,1fr);gap:8px;align-items:end;height:120px;position:relative;margin-top:6px}
+.week .goal{position:absolute;left:0;right:0;border-top:1.5px dashed var(--line);pointer-events:none}
+.week .goal span{position:absolute;right:0;top:-18px;font-size:10.5px;color:var(--faint);font-family:var(--en)}
+.day{display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.day .col{width:100%;max-width:30px;border-radius:9px 9px 5px 5px;background:var(--blue-soft);min-height:4px;position:relative}
+.day .col.hit{background:var(--blue)}
+.day.today .col{background:linear-gradient(180deg,var(--accent-2),var(--accent))}
+.day .n{font-family:var(--en);font-size:10.5px;color:var(--muted);height:14px}
+.day .wd{font-size:11px;color:var(--faint)}
+.day.today .wd{color:var(--accent);font-weight:700}
+
+/* ---------- mastery ---------- */
+.master-top{display:flex;justify-content:space-between;align-items:flex-end;gap:12px}
+.bigpct{font-family:var(--en);font-weight:600;font-size:36px;line-height:1;font-variant-numeric:tabular-nums}
+.bigpct small{font-size:16px;color:var(--muted);font-weight:400}
+.bar{height:10px;border-radius:99px;background:var(--surface2);overflow:hidden;display:flex}
+.bar i{display:block;height:100%}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.legend span::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px;background:var(--c);vertical-align:1px}
+.legend b{font-family:var(--en);font-weight:600;color:var(--ink);margin-left:3px}
+
+/* ---------- weak points ---------- */
+.wp{display:grid;grid-template-columns:52px 1fr auto;gap:12px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.wp:first-of-type{border-top:0;padding-top:0}
+.wp .name{font-weight:700;font-size:14.5px}
+.wp .sub{font-size:12px;color:var(--muted)}
+.btn-s{border:0;border-radius:12px;padding:8px 14px;font-weight:700;font-size:13px;background:var(--accent-soft);color:var(--accent);white-space:nowrap}
+.placeholder{display:flex;gap:12px;align-items:center;color:var(--muted);font-size:13px}
+
+/* ---------- mode tiles (問題タブ) ---------- */
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.mode{display:flex;flex-direction:column;align-items:flex-start;gap:6px;text-align:left;background:var(--surface);border:1px solid var(--card-border);box-shadow:var(--shadow);border-radius:var(--r);padding:16px;min-height:132px;transition:transform .15s}
+.mode:hover{transform:translateY(-2px)}
+.mode:active{transform:scale(.98)}
+.mode .ico{width:40px;height:40px;border-radius:12px}
+.mode .t{font-weight:700;font-size:15.5px}
+.mode .d{font-size:12px;color:var(--muted);line-height:1.5}
+.mode .n{margin-top:auto;font-family:var(--en);font-weight:600;font-size:12px;color:var(--accent)}
+.mode.primary{grid-column:1/-1;min-height:0;color:var(--on-navy);background:linear-gradient(150deg,var(--navy),var(--navy2));border-color:transparent}
+.mode.primary .d,.mode.primary .n{color:var(--on-navy-muted)}
+
+/* ---------- common controls ---------- */
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:99px;padding:6px 13px;font-size:13px}
+.chip[aria-pressed="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:16px;padding:12px 16px;font-weight:700;min-height:50px}
+.btn.primary{border:0;color:#fff;background:linear-gradient(135deg,var(--accent),var(--accent-2));box-shadow:0 6px 16px rgba(255,106,61,.28)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--muted);padding-inline:8px;font-weight:500;min-height:40px}
+.btn.block{width:100%}
+.grade{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.grade .btn{display:flex;flex-direction:column;align-items:center;line-height:1.3;padding-block:10px;border-width:1.5px}
+.grade .btn small{font-size:11px;color:var(--muted);font-family:var(--en);font-weight:400}
+.g-again{border-color:var(--bad)!important;color:var(--bad)}
+.g-hard{border-color:var(--warn)!important;color:var(--warn)}
+.g-good{border-color:var(--good)!important;color:var(--good)}
+
+/* session header */
+.sess{display:flex;align-items:center;gap:10px}
+.sess .bar{flex:1;height:8px}
+.sess .bar i{background:linear-gradient(90deg,var(--accent),var(--accent-2));border-radius:99px;transition:width .3s}
+.sess .num{font-size:13px}
+
+/* flash card */
+.flash{min-height:320px;display:flex;flex-direction:column;gap:14px;cursor:pointer;border-radius:24px}
+.word{font-family:var(--en);font-weight:600;font-size:clamp(30px,8vw,42px);letter-spacing:-.01em;line-height:1.15;word-break:break-word}
+.pos{display:inline-flex;align-items:center;justify-content:center;min-width:22px;height:22px;padding:0 5px;border-radius:7px;background:var(--navy);color:#fff;font-size:12px;font-weight:700;margin-right:6px;vertical-align:2px}
+.meaning{font-size:19px;font-weight:700}
+.ex{border-left:3px solid var(--accent);padding-left:12px;background:var(--surface2);border-radius:0 12px 12px 0;padding-block:8px;padding-right:10px}
+.ex .e{font-family:var(--en);font-size:15px}
+.ex .e mark{background:var(--accent-soft);color:inherit;border-radius:4px;padding:0 2px}
+.ex .j{font-size:13px;color:var(--muted)}
+.hint{margin-top:auto;text-align:center;color:var(--faint);font-size:13px}
+.meta{display:flex;gap:6px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.tag{background:var(--surface2);border-radius:8px;padding:2px 8px;font-size:11.5px}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:14px;border:0;background:var(--blue-soft);color:var(--blue);flex:none}
+.icon-btn svg{width:20px;height:20px}
+
+/* quiz (answer-sheet bubbles) */
+.stem{font-family:var(--en);font-size:18px;line-height:1.65}
+.stem .blank{display:inline-block;min-width:88px;border-bottom:2px solid var(--ink);margin:0 2px;text-align:center;color:var(--accent);font-weight:600}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;text-align:left;background:var(--surface);border:1.5px solid var(--line);border-radius:16px;padding:12px 14px;min-height:56px;transition:border-color .15s,transform .1s}
+.opt:hover:not([disabled]){border-color:var(--blue)}
+.opt:active:not([disabled]){transform:scale(.99)}
+.opt .bub{flex:none;width:32px;height:32px;border-radius:50%;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-family:var(--en);font-weight:600;font-size:13px;color:var(--muted)}
+.opt .tx{font-size:16px}
+.opt.en-opt .tx{font-family:var(--en)}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.right .bub{background:var(--good);color:#fff}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt.wrong .bub{background:var(--bad);color:#fff}
+.opt[disabled]{cursor:default}
+.verdict{font-weight:700;font-size:18px}
+.verdict.ok{color:var(--good)} .verdict.ng{color:var(--bad)}
+.explain{background:var(--surface);border:1px solid var(--card-border);box-shadow:var(--shadow);border-radius:var(--r);padding:16px;display:flex;flex-direction:column;gap:10px}
+
+/* list */
+.search{width:100%;padding:13px 16px;border-radius:16px;border:1px solid var(--line);background:var(--surface);color:var(--ink);font:inherit;font-size:16px}
+.list{background:var(--surface);border:1px solid var(--card-border);box-shadow:var(--shadow);border-radius:var(--r);overflow:hidden}
+.li{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:12px 16px;border-top:1px solid var(--line)}
+.li:first-child{border-top:0}
+.li .w{font-family:var(--en);font-weight:600}
+.li .m{font-size:13px;color:var(--muted);line-height:1.45}
+.dot{width:10px;height:10px;border-radius:50%;background:var(--c,var(--line))}
+.li .cnt{font-family:var(--en);font-size:12px;color:var(--bad)}
+.more{padding:12px;text-align:center}
+
+/* result */
+.result{align-items:center;text-align:center;gap:8px;padding-block:26px}
+.result h2{font-size:24px}
+.xp{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:99px;background:var(--accent-soft);color:var(--accent);font-family:var(--en);font-weight:600;font-size:14px}
+.big{font-family:var(--en);font-size:56px;line-height:1}
+
+/* settings */
+.field{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line)}
+.field:first-of-type{border-top:0}
+select{font:inherit;padding:8px 10px;border-radius:12px;border:1px solid var(--line);background:var(--surface2);color:var(--ink)}
+.danger{color:var(--bad);border-color:var(--bad)}
+
+/* bottom nav */
+nav.tabs{position:fixed;left:0;right:0;bottom:0;z-index:5;padding:0 12px calc(10px + env(safe-area-inset-bottom,0px));pointer-events:none}
+nav.tabs .in{pointer-events:auto;max-width:440px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);height:var(--nav-h);padding:6px;border-radius:24px;
+  background:color-mix(in srgb,var(--surface) 88%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);box-shadow:0 10px 30px rgba(18,26,51,.14)}
+nav.tabs button{border:0;background:none;border-radius:18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:10.5px;color:var(--muted);transition:background .15s,color .15s}
+nav.tabs button svg{width:22px;height:22px}
+nav.tabs button[aria-current="page"]{color:var(--accent);background:var(--accent-soft);font-weight:700}
+
+.empty{text-align:center;padding:32px 16px;color:var(--muted)}
+@keyframes pop{from{transform:translateY(6px);opacity:.4}to{transform:none;opacity:1}}
+.pop{animation:pop .22s ease-out}
+@keyframes burst{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.06);opacity:1}100%{transform:scale(1)}}
+.burst{animation:burst .5s cubic-bezier(.2,.8,.2,1)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+@media (max-width:340px){.hero-body{grid-template-columns:1fr;justify-items:center}.kpis{width:100%}}
+.day .wd{height:17px;line-height:17px}
+
+/* ---------- accounts ---------- */
+body.locked nav.tabs{display:none}
+.auth{max-width:440px;margin:0 auto;display:flex;flex-direction:column;gap:18px;padding-top:12px}
+.auth-brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:15px;display:flex;align-items:center;justify-content:center;color:#fff;background:linear-gradient(150deg,var(--navy),var(--navy2))}
+.logo svg{width:26px;height:26px}
+.brand{font-family:var(--en);font-weight:700;font-size:21px;letter-spacing:-.01em}
+.users{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px}
+.ut{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 10px;border-radius:var(--r);background:var(--surface);border:1px solid var(--card-border);box-shadow:var(--shadow);transition:transform .15s}
+.ut:hover{transform:translateY(-2px)}
+.ut .n{font-weight:700}
+.av{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:#fff;font-weight:700;flex:none;line-height:1}
+.lbl{font-size:13px;font-weight:700}
+.check{display:flex;align-items:center;gap:8px;font-size:13.5px}
+.check input{width:18px;height:18px;accent-color:var(--accent)}
+.err{color:var(--bad);font-size:13px;font-weight:700}
+.pill.me{border:0;padding:0 2px;background:transparent}
+.tgt{position:relative;z-index:1;display:flex;gap:14px;flex-wrap:wrap;margin-top:10px;font-size:12.5px;color:var(--on-navy-muted)}
+.tgt b{color:var(--on-navy);font-size:15px}
+.btn[disabled]{opacity:.55;cursor:default}
+</style>
+
+<main class="wrap" id="app"></main>
+
+<nav class="tabs" aria-label="メニュー"><div class="in">
+  <button data-tab="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/></svg>ホーム</button>
+  <button data-tab="cards"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="5" width="14" height="16" rx="2"/><path d="M8 3h11a2 2 0 0 1 2 2v13"/></svg>単語カード</button>
+  <button data-tab="quiz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="6" cy="7" r="2"/><circle cx="6" cy="17" r="2"/><path d="M11 7h9M11 17h9"/><circle cx="6" cy="7" r="1" fill="currentColor"/></svg>問題</button>
+  <button data-tab="list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/></svg>一覧</button>
+</div></nav>
+
+<script>
+const APP = {"title": "有美さんの単語帳", "sub": "My English Words", "key": "yumi-words", "toeic": false};
+const WORDS = [{"word": "reschedule", "pos": ["動"], "meaning": "再スケジュールする、予定を変更する", "ex": "The event was rescheduled for October.", "exJa": "そのイベントは10月に延期されました。", "created": "2026-09-23", "sec": "2026年9月", "known": false, "q": {"stem": "Can we ------- our meeting? I have a dentist appointment on Tuesday.", "choices": ["reschedule", "remind", "recommend", "return"], "answer": 0, "explain": "reschedule は「予定を変更する」。歯医者の予約があるので会議の日程を変えたい、という文脈です。"}}, {"word": "nationalism", "pos": ["名"], "meaning": "国家主義、ナショナリズム", "ex": "We talked about nationalism in different countries.", "exJa": "私たちはさまざまな国のナショナリズムについて話しました。", "created": "2026-09-23", "sec": "2026年9月", "known": false, "q": {"stem": "The rise of ------- in Europe worried many political experts.", "choices": ["tourism", "journalism", "nationalism", "optimism"], "answer": 2, "explain": "nationalism は「国家主義」。政治の専門家が心配する「台頭」として自然なのはこれです。"}}, {"word": "populism", "pos": ["名"], "meaning": "ポピュリズム、大衆迎合主義", "ex": "We discussed populism and different political movements.", "exJa": "私たちはポピュリズムとさまざまな政治運動について話し合いました。", "created": "2026-09-23", "sec": "2026年9月", "known": false, "q": {"stem": "Many politicians use ------- to appeal to ordinary people's frustrations.", "choices": ["realism", "populism", "capitalism", "minimalism"], "answer": 1, "explain": "populism は一般の人々の不満に訴える政治手法「ポピュリズム」。"}}, {"word": "gotcha", "pos": ["句"], "meaning": "わかった、了解", "ex": "You need to leave at 9:15? Gotcha.", "exJa": "9時15分に出ないといけないの？わかった。", "created": "2026-09-23", "sec": "2026年9月", "known": false, "q": {"stem": "A: Turn left at the bank and it's on your right. B: -------, thanks!", "choices": ["Pardon", "Anyway", "Whatever", "Gotcha"], "answer": 3, "explain": "Gotcha は \"I got you\" のくだけた形で「わかった」。道案内を理解した返事として自然です。"}}, {"word": "a hundred percent", "pos": ["句"], "meaning": "完全に、間違いなく", "def": "completely, entirely or without any doubts.", "ex": "Are you a hundred percent sure?", "exJa": "100パーセント確信していますか？", "created": "2026-09-23", "sec": "2026年9月", "known": false, "q": {"stem": "I'm ------- behind you on this decision.", "choices": ["a little bit", "a long time", "a few times", "a hundred percent"], "answer": 3, "explain": "a hundred percent は「100パーセント、完全に」。\"be 100% behind you\" で「全面的に支持する」。"}}, {"word": "totally", "pos": ["副"], "meaning": "完全に、まったく", "ex": "I totally agree with that statement.", "exJa": "その意見に完全に同意します。", "created": "2026-09-23", "sec": "2026年9月", "known": false, "q": {"stem": "I ------- forgot about our lunch plans. I'm so sorry!", "choices": ["hardly", "totally", "rarely", "barely"], "answer": 1, "explain": "totally は「完全に」。\"totally forgot\" で「すっかり忘れていた」。他の3つは「ほとんど〜ない」の意味です。"}}, {"word": "persistent", "pos": ["形"], "meaning": "粘り強い、しつこい", "ex": "She was persistent and eventually achieved her goal.", "exJa": "彼女は粘り強く、最終的に目標を達成しました。", "created": "2026-09-20", "sec": "2026年9月", "known": false, "q": {"stem": "Be ------- and keep calling them until you get an answer.", "choices": ["persistent", "hesitant", "reluctant", "absent"], "answer": 0, "explain": "persistent は「粘り強い」。返事が来るまで電話し続ける、という文脈に合います。"}}, {"word": "helicopter parenting", "pos": ["名"], "meaning": "過保護な育児（ヘリコプター・ペアレンティング）", "ex": "Helicopter parenting can prevent children from becoming independent.", "exJa": "ヘリコプター・ペアレンティングは子どもが自立するのを妨げることがあります。", "created": "2026-09-20", "sec": "2026年9月", "known": false, "q": {"stem": "Checking your child's phone every hour is a form of -------.", "choices": ["home schooling", "babysitting", "helicopter parenting", "daycare"], "answer": 2, "explain": "helicopter parenting は子どもの上を飛び回るように監視・干渉する過保護な育児のこと。"}}, {"word": "snowplough parenting", "pos": ["名"], "meaning": "障害除去型育児（スノープラウ・ペアレンティング）", "ex": "Snowplough parenting may make it harder for children to learn how to solve problems independently.", "exJa": "スノープラウ・ペアレンティングは、子どもが自力で問題を解決する方法を学びにくくするかもしれません。", "created": "2026-09-20", "sec": "2026年9月", "known": false, "q": {"stem": "Solving every problem before your child even faces it is called -------.", "choices": ["helicopter parenting", "free-range parenting", "snowplough parenting", "co-parenting"], "answer": 2, "explain": "snowplough（除雪車）のように子どもの前の障害を全部取り除く育児。見守って干渉する helicopter parenting と区別しましょう。"}}, {"word": "the apple doesn't fall far from the tree", "pos": ["句"], "meaning": "子は親に似る（蛙の子は蛙）", "def": "Children often have similar personalities, behaviors, or characteristics to their parents.", "ex": "Tom is just as generous as his mother. The apple doesn't fall far from the tree.", "exJa": "トムは母親と同じくらい気前がいい。蛙の子は蛙だね。", "created": "2026-09-20", "sec": "2026年9月", "known": false, "q": {"stem": "Her daughter loves painting just like she does. -------.", "choices": ["The apple doesn't fall far from the tree", "Every cloud has a silver lining", "Better late than never", "Practice makes perfect"], "answer": 0, "explain": "親と同じように娘も絵が好き、という「子は親に似る」ことわざです。"}}, {"word": "prescribed", "pos": ["形"], "meaning": "処方された", "ex": "She is taking the medication prescribed by her doctor.", "exJa": "彼女は医師に処方された薬を飲んでいます。", "created": "2026-09-20", "sec": "2026年9月", "known": false, "q": {"stem": "Take only the medicine ------- by your doctor.", "choices": ["described", "subscribed", "inscribed", "prescribed"], "answer": 3, "explain": "prescribed は「処方された」。describe（説明する）や subscribe（定期購読する）と混同しないように。"}}, {"word": "menopause", "pos": ["名"], "meaning": "閉経、更年期", "ex": "She talked to her doctor about managing her menopause symptoms.", "exJa": "彼女は更年期の症状への対処について医師と話しました。", "created": "2026-09-20", "sec": "2026年9月", "known": false, "q": {"stem": "Many women experience hot flashes during -------.", "choices": ["pregnancy", "menopause", "adolescence", "childhood"], "answer": 1, "explain": "menopause は「閉経、更年期」。hot flashes（ほてり）は更年期の代表的な症状です。"}}, {"word": "wisely", "pos": ["副"], "meaning": "賢く", "ex": "You should spend your money wisely.", "exJa": "お金は賢く使うべきです。", "created": "2026-09-20", "sec": "2026年9月", "known": false, "q": {"stem": "Choose your words ------- when you talk to your boss.", "choices": ["wisely", "loudly", "quickly", "rarely"], "answer": 0, "explain": "wisely は「賢く」。\"choose your words wisely\" で「言葉を慎重に選ぶ」。"}}, {"word": "flood", "pos": ["名"], "meaning": "洪水", "ex": "The heavy rain caused a flood in the city.", "exJa": "大雨が市内に洪水を引き起こしました。", "created": "2026-09-20", "sec": "2026年9月", "known": false, "q": {"stem": "The river rose so fast that the ------- reached our front door.", "choices": ["drought", "breeze", "flood", "fog"], "answer": 2, "explain": "flood は「洪水」。川の水位が上がって玄関まで来た、という文脈です。drought は「干ばつ」。"}}, {"word": "per hour", "pos": ["句"], "meaning": "1時間あたり、毎時", "ex": "The car was traveling at 80 kilometers per hour.", "exJa": "その車は時速80キロで走っていました。", "created": "2026-09-20", "sec": "2026年9月", "known": false, "q": {"stem": "The speed limit here is 40 kilometers -------.", "choices": ["per day", "per hour", "per person", "per piece"], "answer": 1, "explain": "速度は「キロメートル毎時（per hour）」で表します。"}}, {"word": "explode", "pos": ["動"], "meaning": "爆発する", "ex": "The fireworks exploded in the sky.", "exJa": "花火が空で爆発しました。", "created": "2026-09-20", "sec": "2026年9月", "known": false, "q": {"stem": "Be careful, the old gas tank could ------- at any moment.", "choices": ["expand", "expire", "export", "explode"], "answer": 3, "explain": "explode は「爆発する」。古いガスタンクに関する警告として自然です。expire は「期限が切れる」。"}}, {"word": "instantly", "pos": ["副"], "meaning": "すぐに、即座に", "def": "immediately", "ex": "I fell asleep almost instantly.", "exJa": "私はほとんど即座に眠ってしまいました。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "She recognized his voice ------- on the phone.", "choices": ["gradually", "eventually", "occasionally", "instantly"], "answer": 3, "explain": "instantly は「即座に」。電話の声をすぐに聞き分けた、という文脈です。"}}, {"word": "anesthesia", "pos": ["名"], "meaning": "麻酔", "def": "medicine that makes you unable to feel pain or feel", "ex": "The examination is performed under anesthesia.", "exJa": "その検査は麻酔下で行われます。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "The dentist gave me ------- so I wouldn't feel any pain.", "choices": ["vitamins", "anesthesia", "a bandage", "a prescription"], "answer": 1, "explain": "anesthesia は「麻酔」。痛みを感じないようにするために歯医者が使うものです。"}}, {"word": "autonomous", "pos": ["形"], "meaning": "自律的な、自主的な", "def": "able to act or work independently", "ex": "Some AI systems can become more autonomous.", "exJa": "一部のAIシステムはより自律的になる可能性があります。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "------- cars can drive without a human driver.", "choices": ["Autonomous", "Anonymous", "Ambitious", "Enormous"], "answer": 0, "explain": "autonomous は「自律的な」。autonomous car は「自動運転車」。anonymous（匿名の）と形が似ているので注意。"}}, {"word": "get knocked out", "pos": ["句"], "meaning": "意識を失う、気絶する", "def": "become unconscious, usually because of medicine or an impact", "ex": "I don't remember anything after I get knocked out.", "exJa": "意識を失った後のことは何も覚えていません。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "He ------- by the boxer's punch in the first round.", "choices": ["got dressed up", "got carried away", "got knocked out", "got fed up"], "answer": 2, "explain": "get knocked out は「（打撃や薬で）意識を失う」。ボクシングのパンチで倒された場面です。"}}, {"word": "by itself", "pos": ["句"], "meaning": "一人で、自動的に", "ex": "The new AI can continue by itself.", "exJa": "その新しいAIは自分だけで続けることができます。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "The door closed ------- because of the wind.", "choices": ["by chance", "by hand", "by itself", "by heart"], "answer": 2, "explain": "by itself は「それ自体で、自動的に」。誰も触っていないのに風でドアが閉まった、という文です。"}}, {"word": "on bad terms", "pos": ["句"], "meaning": "不仲で、関係が悪くて", "ex": "The two leaders are on bad terms.", "exJa": "2人の指導者は不仲です。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "I'm ------- with my neighbor since the noise complaint.", "choices": ["on bad terms", "on good terms", "on time", "on purpose"], "answer": 0, "explain": "on bad terms は「不仲で」。騒音の苦情以来、隣人と関係が悪い、という文脈です。"}}, {"word": "self-learning", "pos": ["形"], "meaning": "自己学習の、自ら学習する", "ex": "The article talked about self-learning AI.", "exJa": "その記事は自己学習するAIについて書いていました。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "This ------- robot improves its skills every day without a teacher.", "choices": ["self-service", "self-employed", "self-made", "self-learning"], "answer": 3, "explain": "self-learning は「自ら学習する」。先生なしで毎日上達するロボットの説明です。"}}, {"word": "current", "pos": ["形"], "meaning": "現在の", "ex": "AI could change the current network.", "exJa": "AIは現在のネットワークを変える可能性があります。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "What is your ------- address?", "choices": ["former", "current", "ancient", "future"], "answer": 1, "explain": "current は「現在の」。\"current address\" で「現住所」。former は「以前の」。"}}, {"word": "goosebumps", "pos": ["名"], "meaning": "鳥肌", "ex": "That scary story gave me goosebumps.", "exJa": "その怖い話を聞いて鳥肌が立ちました。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "The cold wind gave me ------- on my arms.", "choices": ["goosebumps", "headaches", "blisters", "bruises"], "answer": 0, "explain": "goosebumps は「鳥肌」。寒さや恐怖で立ちます。\"give me goosebumps\" の形で覚えましょう。"}}, {"word": "landslide", "pos": ["名"], "meaning": "土砂崩れ", "ex": "Nepal had a landslide.", "exJa": "ネパールで土砂崩れがありました。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "Heavy rain caused a ------- that blocked the mountain road.", "choices": ["snowstorm", "heatwave", "landslide", "drought"], "answer": 2, "explain": "landslide は「土砂崩れ」。大雨が原因で山道をふさいだ、という文脈です。"}}, {"word": "glacier", "pos": ["名"], "meaning": "氷河", "ex": "The glacier is melting.", "exJa": "氷河が溶けています。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "We took a boat tour to see the huge ------- in Alaska.", "choices": ["desert", "glacier", "volcano", "canyon"], "answer": 1, "explain": "glacier は「氷河」。アラスカでボートツアーで見る巨大なもの、といえば氷河です。"}}, {"word": "consider", "pos": ["動"], "meaning": "考慮する、検討する", "ex": "Everyone must consider the Earth.", "exJa": "誰もが地球のことを考えなければなりません。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "Have you ------- moving closer to your office?", "choices": ["compared", "complained", "confirmed", "considered"], "answer": 3, "explain": "consider は「検討する」。consider + 動詞のing 形で「〜することを検討する」。"}}, {"word": "food stall", "pos": ["名"], "meaning": "屋台", "ex": "The stadium has many food stalls.", "exJa": "そのスタジアムにはたくさんの屋台があります。", "created": "2026-09-15", "sec": "2026年9月", "known": false, "q": {"stem": "We bought grilled squid from a ------- at the festival.", "choices": ["parking lot", "bus stop", "ticket office", "food stall"], "answer": 3, "explain": "food stall は「屋台」。お祭りで焼きイカを買う場所として自然です。"}}, {"word": "bones", "pos": ["名"], "meaning": "骨", "ex": "Zinc helps keep your bones healthy and strong.", "exJa": "亜鉛は骨を健康で丈夫に保つのに役立ちます。", "created": "2026-09-12", "sec": "2026年9月", "known": false, "q": {"stem": "Drinking milk helps keep your ------- strong.", "choices": ["nails", "bones", "lungs", "veins"], "answer": 1, "explain": "bones は「骨」。牛乳のカルシウムが骨を丈夫にする、という定番の文です。"}}, {"word": "rescheduled", "pos": ["動"], "meaning": "再スケジュールされた、日程変更された", "ex": "My flight was rescheduled for the next day.", "exJa": "私のフライトは翌日に変更されました。", "created": "2026-09-08", "sec": "2026年9月", "known": false, "q": {"stem": "The concert was ------- because the singer got sick.", "choices": ["rescheduled", "reserved", "recorded", "rewarded"], "answer": 0, "explain": "rescheduled は「日程が変更された」。歌手が病気になったので別の日に、という文脈です。"}}, {"word": "hurricane", "pos": ["名"], "meaning": "ハリケーン", "ex": "Our flight was canceled because of a hurricane.", "exJa": "ハリケーンのため、私たちのフライトは欠航になりました。", "created": "2026-09-08", "sec": "2026年9月", "known": false, "q": {"stem": "A powerful ------- hit Florida last night.", "choices": ["earthquake", "drought", "hurricane", "heatwave"], "answer": 2, "explain": "hurricane は「ハリケーン」。フロリダを襲う強力なもの、といえばハリケーンです。"}}, {"word": "muscle", "pos": ["名"], "meaning": "筋肉", "ex": "I want to lose weight and build muscle.", "exJa": "体重を減らして筋肉をつけたいです。", "created": "2026-09-08", "sec": "2026年9月", "known": false, "q": {"stem": "I pulled a ------- in my back while lifting boxes.", "choices": ["bone", "nerve", "muscle", "joint"], "answer": 2, "explain": "\"pull a muscle\" で「筋肉を痛める」。箱を持ち上げて背中の筋肉を痛めた、という文です。"}}, {"word": "protein", "pos": ["名"], "meaning": "タンパク質", "ex": "Do you get enough protein?", "exJa": "タンパク質は十分に摂っていますか？", "created": "2026-09-08", "sec": "2026年9月", "known": false, "q": {"stem": "Eggs and chicken are good sources of -------.", "choices": ["protein", "sugar", "caffeine", "salt"], "answer": 0, "explain": "protein は「タンパク質」。卵や鶏肉はタンパク質の代表的な食品です。"}}, {"word": "shop staff", "pos": ["名"], "meaning": "店員", "def": "people who work in a shop", "ex": "You can talk to the shop staff.", "exJa": "店員に話してみてください。", "created": "2026-09-08", "sec": "2026年9月", "known": false, "q": {"stem": "If you can't find your size, just ask the -------.", "choices": ["shoppers", "suppliers", "neighbors", "shop staff"], "answer": 3, "explain": "shop staff は「店員」。staff は集合名詞で、stuff（物）とスペルが似ているので注意。"}}, {"word": "receptionist", "pos": ["名"], "meaning": "受付係", "ex": "The receptionist was kind and helpful.", "exJa": "受付の人は親切で助けになってくれました。", "created": "2026-09-08", "sec": "2026年9月", "known": false, "q": {"stem": "The ------- at the hotel gave us a map of the city.", "choices": ["accountant", "receptionist", "mechanic", "pharmacist"], "answer": 1, "explain": "receptionist は「受付係」。ホテルで地図を渡してくれる人です。"}}, {"word": "fasten", "pos": ["動"], "meaning": "締める、固定する", "ex": "Fasten your seatbelt.", "exJa": "シートベルトを締めてください。", "created": "2026-09-08", "sec": "2026年9月", "known": false, "q": {"stem": "Please ------- your seatbelt before we take off.", "choices": ["fasten", "loosen", "unlock", "remove"], "answer": 0, "explain": "fasten は「締める」。\"fasten your seatbelt\" は機内アナウンスの定番表現です。"}}, {"word": "uncoordinated", "pos": ["形"], "meaning": "ぎこちない、不器用な", "ex": "I feel uncoordinated when I dance.", "exJa": "ダンスをすると自分がぎこちなく感じます。", "created": "2026-09-07", "sec": "2026年9月", "known": false, "q": {"stem": "I'm so ------- that I always drop the ball in tennis.", "choices": ["unemployed", "unfamiliar", "uncoordinated", "unlimited"], "answer": 2, "explain": "uncoordinated は「体の動きがぎこちない」。テニスでいつもボールを落とす、という文脈です。"}}, {"word": "stiff", "pos": ["形"], "meaning": "硬い、こわばった", "ex": "My body feels stiff when I dance.", "exJa": "ダンスをすると体が硬く感じます。", "created": "2026-09-07", "sec": "2026年9月", "known": false, "q": {"stem": "My neck feels ------- after sleeping on the plane.", "choices": ["soft", "stiff", "smooth", "loose"], "answer": 1, "explain": "stiff は「こわばった」。飛行機で寝て首が固まった、という文です。"}}, {"word": "tiring", "pos": ["形"], "meaning": "疲れる、骨の折れる", "ex": "My work is very tiring.", "exJa": "私の仕事はとても疲れます。", "created": "2026-09-07", "sec": "2026年9月", "known": false, "q": {"stem": "Standing all day at the shop is really -------.", "choices": ["boring", "exciting", "relaxing", "tiring"], "answer": 3, "explain": "tiring は「（人を）疲れさせる」。tired（疲れた）との違いに注意。"}}, {"word": "once every other week", "pos": ["句"], "meaning": "隔週に、2週間に1回", "ex": "I go dancing once every other week.", "exJa": "私は隔週でダンスに行きます。", "created": "2026-09-07", "sec": "2026年9月", "known": false, "q": {"stem": "The cleaning service comes -------, so twice a month.", "choices": ["once a year", "every single day", "twice a week", "once every other week"], "answer": 3, "explain": "every other week は「1週おき＝隔週」。月に2回、という説明と一致します。"}}, {"word": "childcare", "pos": ["名"], "meaning": "育児、保育", "ex": "I have work, housework, and childcare.", "exJa": "私には仕事と家事と育児があります。", "created": "2026-09-07", "sec": "2026年9月", "known": false, "q": {"stem": "Working parents often struggle to find affordable -------.", "choices": ["homework", "childcare", "housework", "furniture"], "answer": 1, "explain": "childcare は「育児、保育（サービス）」。働く親が手頃な保育を探すのに苦労する、という文です。"}}, {"word": "looking forward to", "pos": ["句"], "meaning": "楽しみにしている", "ex": "I'm looking forward to my trip to Hawaii next week.", "exJa": "来週のハワイ旅行を楽しみにしています。", "created": "2026-08-05", "sec": "2026年8月", "known": false, "q": {"stem": "I'm ------- seeing you at the party on Saturday!", "choices": ["looking forward to", "looking after", "looking up", "looking into"], "answer": 0, "explain": "look forward to + 動詞のing 形で「〜を楽しみにする」。to の後は名詞か -ing 形です。"}}, {"word": "birthplace", "pos": ["名"], "meaning": "生まれ故郷、出生地", "ex": "My birthplace is Ishikawa.", "exJa": "私の生まれ故郷は石川です。", "created": "2026-08-05", "sec": "2026年8月", "known": false, "q": {"stem": "Nagasaki is the ------- of my grandfather.", "choices": ["workplace", "marketplace", "birthplace", "fireplace"], "answer": 2, "explain": "birthplace は「出生地」。workplace は「職場」、fireplace は「暖炉」。"}}, {"word": "prime minister", "pos": ["名"], "meaning": "首相、総理大臣", "ex": "I made a news report about Japan's prime minister.", "exJa": "日本の首相についてのニュースレポートを作りました。", "created": "2026-08-05", "sec": "2026年8月", "known": false, "q": {"stem": "The ------- gave a speech about the new tax policy.", "choices": ["police officer", "tour guide", "prime minister", "flight attendant"], "answer": 2, "explain": "prime minister は「首相」。新しい税制について演説する人として自然です。"}}, {"word": "winter", "pos": ["名"], "meaning": "冬", "ex": "In winter, the fish in Kanazawa is the most delicious.", "exJa": "冬は金沢の魚が一番おいしいです。", "created": "2026-08-05", "sec": "2026年8月", "known": false, "q": {"stem": "I always get a cold in ------- when it's freezing outside.", "choices": ["winter", "summer", "spring", "autumn"], "answer": 0, "explain": "winter は「冬」。外が凍えるほど寒い季節です。"}}, {"word": "relax", "pos": ["動"], "meaning": "リラックスする、くつろぐ", "ex": "I want to relax on the beach with my daughter in Hawaii.", "exJa": "ハワイのビーチで娘とリラックスしたいです。", "created": "2026-08-05", "sec": "2026年8月", "known": false, "q": {"stem": "After a long week, I like to ------- in a hot bath.", "choices": ["rush", "worry", "hurry", "relax"], "answer": 3, "explain": "relax は「リラックスする」。長い1週間のあとにお風呂でくつろぐ、という文です。"}}, {"word": "shellfish", "pos": ["名"], "meaning": "貝類", "ex": "I ate delicious shellfish in Shimoda.", "exJa": "下田でおいしい貝類を食べました。", "created": "2026-08-03", "sec": "2026年8月", "known": false, "q": {"stem": "I'm allergic to -------, so I can't eat shrimp or oysters.", "choices": ["vegetables", "shellfish", "dairy", "nuts"], "answer": 1, "explain": "shellfish は「貝類・甲殻類」。エビやカキが含まれます。"}}, {"word": "clam", "pos": ["名"], "meaning": "ハマグリ、アサリ", "ex": "We grilled fresh clams at the beach.", "exJa": "私たちはビーチで新鮮なハマグリを焼きました。", "created": "2026-08-03", "sec": "2026年8月", "known": false, "q": {"stem": "This pasta is made with fresh ------- and garlic.", "choices": ["clams", "grapes", "beans", "nuts"], "answer": 0, "explain": "clam は「ハマグリ、アサリ」。ニンニクと合わせるボンゴレのようなパスタです。"}}, {"word": "politician", "pos": ["名"], "meaning": "政治家", "ex": "She interviewed a famous politician.", "exJa": "彼女は有名な政治家にインタビューしました。", "created": "2026-08-03", "sec": "2026年8月", "known": false, "q": {"stem": "The ------- promised to lower taxes if elected.", "choices": ["musician", "technician", "politician", "magician"], "answer": 2, "explain": "politician は「政治家」。選挙で当選したら減税すると約束する人です。"}}, {"word": "relieved", "pos": ["形"], "meaning": "安心した、ほっとした", "ex": "I felt relieved after the TV program.", "exJa": "テレビ番組の後、ほっとしました。", "created": "2026-08-03", "sec": "2026年8月", "known": false, "q": {"stem": "I was so ------- when I found my lost wallet.", "choices": ["annoyed", "relieved", "confused", "bored"], "answer": 1, "explain": "relieved は「安心した」。なくした財布が見つかったときの気持ちです。"}}, {"word": "sweating", "pos": ["動"], "meaning": "汗をかいている", "ex": "I was sweating because I was very nervous.", "exJa": "とても緊張していたので汗をかいていました。", "created": "2026-08-03", "sec": "2026年8月", "known": false, "q": {"stem": "I was ------- a lot after running up the stairs.", "choices": ["shaking", "yawning", "sneezing", "sweating"], "answer": 3, "explain": "sweat は「汗をかく」。階段を駆け上がったあとの状態です。"}}, {"word": "stay on top of (something)", "pos": ["句"], "meaning": "〜を把握し続ける、遅れずに管理する", "def": "Keep up with, manage, or remain informed about something so it doesn't become a problem.", "ex": "It's important to stay on top of the latest news.", "exJa": "最新のニュースを把握し続けることが大切です。", "created": "2026-08-02", "sec": "2026年8月", "known": false, "q": {"stem": "She reads the news every day to ------- current events.", "choices": ["get rid of", "run out of", "look down on", "stay on top of"], "answer": 3, "explain": "stay on top of は「遅れずに把握・管理する」。毎日ニュースを読んで時事問題を把握する、という文です。"}}, {"word": "injection", "pos": ["名"], "meaning": "注射", "ex": "The doctor gave me an injection.", "exJa": "医師は私に注射をしました。", "created": "2026-08-02", "sec": "2026年8月", "known": false, "q": {"stem": "The nurse gave me a flu ------- in my left arm.", "choices": ["infection", "injection", "inspection", "instruction"], "answer": 1, "explain": "injection は「注射」。infection（感染）とスペルが似ているので注意。"}}, {"word": "day off", "pos": ["名"], "meaning": "休みの日、休暇", "ex": "I have a day off on Wednesday.", "exJa": "水曜日は休みです。", "created": "2026-08-02", "sec": "2026年8月", "known": false, "q": {"stem": "I'm taking a ------- tomorrow to go to the dentist.", "choices": ["day off", "day care", "daytime", "daylight"], "answer": 0, "explain": "day off は「仕事や学校が休みの日」。\"take a day off\" で「1日休みを取る」。"}}, {"word": "weekdays", "pos": ["名"], "meaning": "平日", "ex": "The library is open only on weekdays.", "exJa": "図書館は平日のみ開いています。", "created": "2026-08-02", "sec": "2026年8月", "known": false, "q": {"stem": "The clinic is open from 9 to 5 on -------.", "choices": ["weekends", "holidays", "weekdays", "birthdays"], "answer": 2, "explain": "weekdays は「平日（月〜金）」。9時から5時という営業時間とも合います。"}}, {"word": "overburdened", "pos": ["形"], "meaning": "過重な負担を負った", "ex": "The nurses are overburdened because the hospital is very busy.", "exJa": "病院がとても忙しいので、看護師たちは過重な負担を抱えています。", "created": "2026-08-02", "sec": "2026年8月", "known": false, "q": {"stem": "Teachers are ------- with paperwork and have little time to teach.", "choices": ["overjoyed", "overpriced", "overburdened", "overcooked"], "answer": 2, "explain": "overburdened は「負担が重すぎる」。書類仕事に追われる教師の状況です。"}}, {"word": "patience", "pos": ["名"], "meaning": "忍耐、我慢", "ex": "Teaching children requires a lot of patience.", "exJa": "子どもを教えるには多くの忍耐が必要です。", "created": "2026-08-02", "sec": "2026年8月", "known": false, "q": {"stem": "Learning a language takes a lot of ------- and practice.", "choices": ["patience", "silence", "distance", "balance"], "answer": 0, "explain": "patience は「忍耐」。語学学習に必要なものです。patients（患者）と発音が同じなので注意。"}}, {"word": "naughty", "pos": ["形"], "meaning": "いたずらな、行儀の悪い", "ex": "The little boy was naughty in class.", "exJa": "その小さな男の子は授業中にいたずらをしました。", "created": "2026-08-02", "sec": "2026年8月", "known": false, "q": {"stem": "The ------- puppy chewed my new shoes.", "choices": ["polite", "shy", "quiet", "naughty"], "answer": 3, "explain": "naughty は「いたずらな」。新しい靴をかじる子犬の様子です。"}}, {"word": "found out about", "pos": ["句"], "meaning": "〜について知った、〜を知るようになった", "def": "learned about something", "ex": "I found out about the news at work.", "exJa": "そのニュースは職場で知りました。", "created": "2026-07-31", "sec": "2026年7月", "known": false, "q": {"stem": "How did you ------- the party? I didn't tell anyone.", "choices": ["put up with", "find out about", "look up to", "get along with"], "answer": 1, "explain": "find out about は「〜について知る、突き止める」。誰にも言っていないのにどうやって知ったの？という文です。"}}, {"word": "heatstroke", "pos": ["名"], "meaning": "熱中症", "def": "a dangerous illness caused by getting too hot", "ex": "People without air conditioning can get heatstroke in very hot weather.", "exJa": "エアコンがない人は、猛暑のときに熱中症になることがあります。", "created": "2026-07-31", "sec": "2026年7月", "known": false, "q": {"stem": "Drink plenty of water to avoid ------- in this heat.", "choices": ["heatstroke", "frostbite", "toothache", "hay fever"], "answer": 0, "explain": "heatstroke は「熱中症」。暑さの中で水分をとって防ぐものです。frostbite は「凍傷」。"}}, {"word": "lifeline", "pos": ["名"], "meaning": "ライフライン（水道・ガス・電気などの生活基盤）", "def": "an essential public service such as water, gas, or electricity", "ex": "The earthquake damaged several lifelines.", "exJa": "地震でいくつかのライフラインが損傷しました。", "created": "2026-07-31", "sec": "2026年7月", "known": false, "q": {"stem": "After the typhoon, workers rushed to restore ------- such as water and gas.", "choices": ["deadlines", "headlines", "lifelines", "guidelines"], "answer": 2, "explain": "lifeline は水道・ガス・電気などの「生活インフラ」。台風後に復旧を急ぐものです。"}}, {"word": "electricity", "pos": ["名"], "meaning": "電気", "def": "power used for lights and machines", "ex": "There are areas with no electricity after the earthquake.", "exJa": "地震の後、電気が通っていない地域があります。", "created": "2026-07-31", "sec": "2026年7月", "known": false, "q": {"stem": "The storm cut off the ------- in our neighborhood for two hours.", "choices": ["furniture", "electricity", "delivery", "traffic"], "answer": 1, "explain": "electricity は「電気」。嵐で2時間停電した、という文です。"}}, {"word": "checkup", "pos": ["名"], "meaning": "健康診断", "ex": "I go for a health checkup every year.", "exJa": "私は毎年健康診断を受けます。", "created": "2026-07-30", "sec": "2026年7月", "known": false, "q": {"stem": "I have a dental ------- next Monday.", "choices": ["check-in", "checkout", "checklist", "checkup"], "answer": 3, "explain": "checkup は「健康診断、検診」。dental checkup で「歯の定期検診」。"}}, {"word": "earthquake", "pos": ["名"], "meaning": "地震", "ex": "The earthquake was very strong.", "exJa": "その地震はとても強かったです。", "created": "2026-07-30", "sec": "2026年7月", "known": false, "q": {"stem": "A strong ------- shook the building early this morning.", "choices": ["rainbow", "sunrise", "breeze", "earthquake"], "answer": 3, "explain": "earthquake は「地震」。建物を揺らすものです。"}}, {"word": "notification", "pos": ["名"], "meaning": "通知", "ex": "I received an earthquake notification.", "exJa": "地震の通知を受け取りました。", "created": "2026-07-30", "sec": "2026年7月", "known": false, "q": {"stem": "I got a ------- on my phone that my package has arrived.", "choices": ["donation", "notification", "location", "vacation"], "answer": 1, "explain": "notification は「通知」。スマホに届く荷物到着のお知らせです。"}}, {"word": "emergency alert", "pos": ["名"], "meaning": "緊急警報", "ex": "My phone sent an emergency alert.", "exJa": "私のスマホに緊急警報が届きました。", "created": "2026-07-30", "sec": "2026年7月", "known": false, "q": {"stem": "Everyone's phone rang at once with an ------- about the tsunami.", "choices": ["emergency alert", "energy bill", "entry ticket", "evening news"], "answer": 0, "explain": "emergency alert は「緊急警報」。津波についてみんなのスマホが一斉に鳴った、という場面です。"}}, {"word": "prepared", "pos": ["形"], "meaning": "準備ができた", "ex": "I am prepared for an emergency.", "exJa": "緊急事態に備えています。", "created": "2026-07-30", "sec": "2026年7月", "known": false, "q": {"stem": "Are you ------- for your job interview tomorrow?", "choices": ["repaired", "compared", "prepared", "declared"], "answer": 2, "explain": "prepared は「準備ができた」。\"be prepared for\" で「〜の準備ができている」。"}}, {"word": "too much", "pos": ["句"], "meaning": "多すぎる、過剰に", "ex": "I ate too much food.", "exJa": "食べ物を食べすぎました。", "created": "2026-07-27", "sec": "2026年7月", "known": false, "q": {"stem": "I drank ------- coffee and now I can't sleep.", "choices": ["too many", "too few", "too much", "too little"], "answer": 2, "explain": "coffee は数えられない名詞なので too much。too many は数えられる名詞に使います。"}}, {"word": "cautious", "pos": ["形"], "meaning": "慎重な、用心深い", "ex": "He is cautious when making important decisions.", "exJa": "彼は重要な決断をするとき慎重です。", "created": "2026-07-27", "sec": "2026年7月", "known": false, "q": {"stem": "Be ------- when you drive on icy roads.", "choices": ["cautious", "careless", "curious", "generous"], "answer": 0, "explain": "cautious は「慎重な」。凍った道路を運転するときの注意です。careless は逆の「不注意な」。"}}, {"word": "competitive", "pos": ["形"], "meaning": "競争の激しい", "def": "Involving strong competition where many people are trying to win or succeed, but only a few can make it.", "ex": "Becoming a professional baseball player is very competitive because only a few people make it to the top.", "exJa": "プロ野球選手になるのは、トップに行けるのがごく少数なので、とても競争が激しいです。", "created": "2026-07-27", "sec": "2026年7月", "known": false, "q": {"stem": "Getting into that university is very -------; only 5% of applicants are accepted.", "choices": ["comfortable", "convenient", "confident", "competitive"], "answer": 3, "explain": "competitive は「競争の激しい」。合格率5%という文脈に合います。"}}, {"word": "take after (someone)", "pos": ["句"], "meaning": "（年上の家族に）似ている", "def": "To resemble or look/act like an older family member in appearance or personality.", "ex": "My children take after my husband in appearance, but my daughter takes after me in personality.", "exJa": "子どもたちは外見は夫に似ていますが、娘は性格は私に似ています。", "created": "2026-07-27", "sec": "2026年7月", "known": false, "q": {"stem": "You really ------- your father; you have the same smile.", "choices": ["take off", "take after", "take over", "take out"], "answer": 1, "explain": "take after は「（親など年上の家族に）似ている」。同じ笑顔、という文脈です。"}}, {"word": "lively / chaotic", "pos": ["形"], "meaning": "活気のある／混沌とした", "def": "Lively means full of life, energy, and enthusiasm. Chaotic means full of fast, unorganized movement (like busy city streets).", "ex": "Vietnam's streets are very lively and chaotic, with motorbikes riding in every direction.", "exJa": "ベトナムの通りはとても活気があって混沌としており、バイクがあらゆる方向に走っています。", "created": "2026-07-27", "sec": "2026年7月", "known": false, "q": {"stem": "The night market was -------, full of music, lights, and crowds.", "choices": ["lively", "silent", "empty", "gloomy"], "answer": 0, "explain": "lively は「活気のある」。音楽や光、人でにぎわう夜市の様子です。"}}, {"word": "marina", "pos": ["名"], "meaning": "マリーナ（ヨットハーバー）", "ex": "The yacht was docked at a marina in southern France.", "exJa": "そのヨットは南フランスのマリーナに停泊していました。", "created": "2026-07-20", "sec": "2026年7月", "known": false, "q": {"stem": "We parked our boat at the ------- and had lunch nearby.", "choices": ["garage", "stadium", "marina", "library"], "answer": 2, "explain": "marina は「マリーナ、ヨットの停泊所」。ボートを停める場所です。"}}, {"word": "high-speed train", "pos": ["名"], "meaning": "高速列車、新幹線", "ex": "We traveled by high-speed train from Paris to southern France.", "exJa": "私たちはパリから南フランスまで高速列車で移動しました。", "created": "2026-07-20", "sec": "2026年7月", "known": false, "q": {"stem": "The ------- from Tokyo to Osaka takes about two and a half hours.", "choices": ["hot-air balloon", "high-speed train", "cable car", "ferry boat"], "answer": 1, "explain": "high-speed train は「高速列車」。東京〜大阪を約2時間半で結ぶ乗り物です。"}}, {"word": "reluctant", "pos": ["形"], "meaning": "気乗りしない、嫌がる", "ex": "She was reluctant to try new food because she was afraid she wouldn't like it.", "exJa": "彼女は口に合わないかもと心配して、新しい食べ物を試すのに気乗りしませんでした。", "created": "2026-07-20", "sec": "2026年7月", "known": false, "q": {"stem": "He was ------- to lend me his car because I'm a new driver.", "choices": ["eager", "grateful", "excited", "reluctant"], "answer": 3, "explain": "reluctant は「気乗りしない」。be reluctant to + 動詞で「〜するのを渋る」。"}}, {"word": "discuss", "pos": ["動"], "meaning": "議論する、話し合う", "ex": "We discussed my future plans during the meeting.", "exJa": "会議中に私の将来の計画について話し合いました。", "created": "2026-07-19", "sec": "2026年7月", "known": false, "q": {"stem": "Let's ------- the plan over lunch tomorrow.", "choices": ["discover", "dismiss", "disturb", "discuss"], "answer": 3, "explain": "discuss は「話し合う」。discuss about とは言わず、直接目的語をとります。"}}, {"word": "confidential", "pos": ["形"], "meaning": "機密の、内密の", "ex": "The meeting was confidential, so I couldn't share the details.", "exJa": "その会議は機密だったので、詳細を共有できませんでした。", "created": "2026-07-19", "sec": "2026年7月", "known": false, "q": {"stem": "This information is -------, so please don't share it with anyone.", "choices": ["convenient", "confidential", "confident", "continuous"], "answer": 1, "explain": "confidential は「機密の」。confident（自信がある）と混同しないように。"}}, {"word": "afterward", "pos": ["副"], "meaning": "その後、後で", "ex": "Afterward, I'm going to take a walk.", "exJa": "その後、散歩に行くつもりです。", "created": "2026-07-19", "sec": "2026年7月", "known": false, "q": {"stem": "We watched a movie and went for ice cream -------.", "choices": ["afterward", "beforehand", "meanwhile", "instead"], "answer": 0, "explain": "afterward は「その後」。映画のあとにアイスを食べに行った、という順序です。"}}, {"word": "describe", "pos": ["動"], "meaning": "説明する、描写する", "ex": "Can you describe your job?", "exJa": "あなたの仕事について説明してもらえますか？", "created": "2026-07-16", "sec": "2026年7月", "known": false, "q": {"stem": "Can you ------- the man who took your bag?", "choices": ["decide", "deliver", "describe", "deserve"], "answer": 2, "explain": "describe は「（特徴を）説明する、描写する」。犯人の見た目を説明する場面です。"}}, {"word": "dedicated", "pos": ["形"], "meaning": "専念した、献身的な", "ex": "She is dedicated to her work.", "exJa": "彼女は仕事に専念しています。", "created": "2026-07-16", "sec": "2026年7月", "known": false, "q": {"stem": "She is a ------- nurse who always puts her patients first.", "choices": ["delicate", "decorated", "dedicated", "delighted"], "answer": 2, "explain": "dedicated は「献身的な」。患者を第一に考える看護師の描写です。"}}, {"word": "lecture", "pos": ["名"], "meaning": "講義", "ex": "She gives lectures to high school students.", "exJa": "彼女は高校生に講義をしています。", "created": "2026-07-16", "sec": "2026年7月", "known": false, "q": {"stem": "The professor gave an interesting ------- on climate change.", "choices": ["lecture", "picture", "mixture", "furniture"], "answer": 0, "explain": "lecture は「講義」。\"give a lecture on 〜\" で「〜について講義する」。"}}, {"word": "head back", "pos": ["句"], "meaning": "戻る、帰路につく", "ex": "I head back to Tokyo the next day.", "exJa": "翌日、東京に戻ります。", "created": "2026-07-16", "sec": "2026年7月", "known": false, "q": {"stem": "It's getting late, so let's ------- to the hotel.", "choices": ["hold on", "hang up", "give up", "head back"], "answer": 3, "explain": "head back は「戻る」。遅くなったからホテルへ戻ろう、という文です。"}}, {"word": "veteran", "pos": ["名"], "meaning": "ベテラン、経験豊富な人", "ex": "She is a veteran news announcer.", "exJa": "彼女はベテランのニュースアナウンサーです。", "created": "2026-07-16", "sec": "2026年7月", "known": false, "q": {"stem": "He is a ------- chef with 30 years of experience.", "choices": ["beginner", "veteran", "volunteer", "visitor"], "answer": 1, "explain": "veteran は「ベテラン」。30年の経験という文脈に合います。"}}, {"word": "hiatus", "pos": ["名"], "meaning": "休止、中断", "ex": "She took an 11-year hiatus to raise her family.", "exJa": "彼女は子育てのために11年間の休止期間をとりました。", "created": "2026-07-16", "sec": "2026年7月", "known": false, "q": {"stem": "The band is back after a five-year -------.", "choices": ["hiatus", "harvest", "hobby", "habit"], "answer": 0, "explain": "hiatus は「活動休止」。5年の休止を経てバンドが復帰、という文です。"}}, {"word": "freelancer", "pos": ["名"], "meaning": "フリーランサー", "ex": "She now works as a freelance announcer.", "exJa": "彼女は今、フリーランスのアナウンサーとして働いています。", "created": "2026-07-16", "sec": "2026年7月", "known": false, "q": {"stem": "As a -------, I can choose my own working hours.", "choices": ["landlord", "trainee", "freelancer", "cashier"], "answer": 2, "explain": "freelancer は「組織に属さず独立して働く人」。働く時間を自分で選べる、という文脈です。"}}, {"word": "segment", "pos": ["名"], "meaning": "セグメント、（番組の）コーナー", "ex": "She has her own news segment.", "exJa": "彼女は自分のニュースコーナーを持っています。", "created": "2026-07-16", "sec": "2026年7月", "known": false, "q": {"stem": "The morning show has a cooking ------- at 8 o'clock.", "choices": ["sequence", "segment", "session", "settlement"], "answer": 1, "explain": "segment は番組の「コーナー」。朝の番組の料理コーナー、という文です。"}}, {"word": "sightseeing", "pos": ["名"], "meaning": "観光", "ex": "My colleagues went sightseeing before the business event.", "exJa": "同僚たちはビジネスイベントの前に観光に行きました。", "created": "2026-07-06", "sec": "2026年7月", "known": false, "q": {"stem": "We spent the whole afternoon ------- in Kyoto.", "choices": ["shopping", "swimming", "sleeping", "sightseeing"], "answer": 3, "explain": "sightseeing は「観光」。\"go sightseeing\" の形でよく使います。"}}, {"word": "pickpocket", "pos": ["名"], "meaning": "スリ", "ex": "You should be careful of pickpockets when traveling.", "exJa": "旅行中はスリに注意すべきです。", "created": "2026-07-06", "sec": "2026年7月", "known": false, "q": {"stem": "A ------- stole my wallet on the crowded train.", "choices": ["passenger", "pedestrian", "photographer", "pickpocket"], "answer": 3, "explain": "pickpocket は「スリ」。混んだ電車で財布を盗む人です。"}}, {"word": "business trip", "pos": ["名"], "meaning": "出張", "ex": "I'm going to Paris on a business trip.", "exJa": "出張でパリに行きます。", "created": "2026-07-06", "sec": "2026年7月", "known": false, "q": {"stem": "My boss is away on a ------- to Singapore this week.", "choices": ["field trip", "business trip", "road trip", "day trip"], "answer": 1, "explain": "business trip は「出張」。\"on a business trip\" の形で覚えましょう。field trip は「遠足・校外学習」。"}}, {"word": "take up", "pos": ["句"], "meaning": "（趣味などを）始める", "ex": "I'd like to take up yoga this year.", "exJa": "今年はヨガを始めたいです。", "created": "2026-07-03", "sec": "2026年7月", "known": false, "q": {"stem": "I want to ------- a new hobby, maybe painting.", "choices": ["take up", "take off", "take out", "take back"], "answer": 0, "explain": "take up は「（趣味・活動を）始める」。新しい趣味を始めたい、という文です。"}}, {"word": "unwind", "pos": ["動"], "meaning": "リラックスする、くつろぐ", "ex": "I like to read a book to unwind.", "exJa": "くつろぐために本を読むのが好きです。", "created": "2026-07-03", "sec": "2026年7月", "known": false, "q": {"stem": "A hot bath is the best way to ------- after work.", "choices": ["unpack", "undo", "unwind", "unlock"], "answer": 2, "explain": "unwind は「緊張をほどいてリラックスする」。仕事のあとのお風呂、という文脈です。"}}, {"word": "anchor", "pos": ["名"], "meaning": "ニュースキャスター", "ex": "She works as a news anchor at a TV station.", "exJa": "彼女はテレビ局でニュースキャスターとして働いています。", "created": "2026-07-03", "sec": "2026年7月", "known": false, "q": {"stem": "The news ------- read the headlines calmly despite the breaking story.", "choices": ["author", "actor", "anchor", "agent"], "answer": 2, "explain": "anchor は「ニュース番組のメインキャスター」。news anchor で覚えましょう。"}}, {"word": "live event", "pos": ["名"], "meaning": "ライブイベント、生のイベント", "def": "an event happening in real time with people attending", "ex": "We went to a live event in the city.", "exJa": "私たちは市内のライブイベントに行きました。", "created": "2026-07-01", "sec": "2026年7月", "known": false, "q": {"stem": "I prefer watching a ------- to streaming it at home.", "choices": ["live event", "late night", "long story", "loud noise"], "answer": 0, "explain": "live event は「観客のいる生のイベント」。家で配信を見るより現地で見るのが好き、という文です。"}}, {"word": "go on for", "pos": ["句"], "meaning": "（ある期間）続く", "def": "to continue for a period of time", "ex": "The meeting went on for three hours.", "exJa": "会議は3時間続きました。", "created": "2026-07-01", "sec": "2026年7月", "known": false, "q": {"stem": "The wedding party ------- hours, until almost midnight.", "choices": ["gave up on", "got on with", "grew out of", "went on for"], "answer": 3, "explain": "go on for + 期間 で「〜の間続く」。真夜中近くまで続いた結婚パーティーです。"}}, {"word": "edible", "pos": ["形"], "meaning": "食用の、食べられる", "def": "safe to eat", "ex": "This plant is edible and very healthy.", "exJa": "この植物は食べられて、とても健康的です。", "created": "2026-07-01", "sec": "2026年7月", "known": false, "q": {"stem": "Are these mushrooms -------? I don't want to get sick.", "choices": ["visible", "edible", "flexible", "terrible"], "answer": 1, "explain": "edible は「食べても安全な」。キノコが食べられるか確認する場面です。"}}, {"word": "apparently", "pos": ["副"], "meaning": "どうやら、聞いたところでは", "def": "according to what is said or believed", "ex": "Apparently, it's going to rain.", "exJa": "どうやら雨が降るみたいです。", "created": "2026-07-01", "sec": "2026年7月", "known": false, "q": {"stem": "-------, the store closes early on Sundays.", "choices": ["Apparently", "Carefully", "Suddenly", "Rarely"], "answer": 0, "explain": "apparently は「聞いたところでは、どうやら」。人から聞いた情報を伝えるときに文頭でよく使います。"}}, {"word": "comfortable", "pos": ["形"], "meaning": "快適な、心地よい", "ex": "The seats were not comfortable.", "exJa": "座席は快適ではありませんでした。", "created": "2026-07-01", "sec": "2026年7月", "known": false, "q": {"stem": "These shoes are so ------- I could walk all day.", "choices": ["expensive", "heavy", "comfortable", "tight"], "answer": 2, "explain": "comfortable は「快適な」。1日中歩けるほど履き心地がいい靴、という文です。"}}, {"word": "economy", "pos": ["名"], "meaning": "経済", "ex": "Japan's economy has changed over the years.", "exJa": "日本の経済は長年にわたって変化してきました。", "created": "2026-07-01", "sec": "2026年7月", "known": false, "q": {"stem": "The ------- is growing, so more people are finding jobs.", "choices": ["ecology", "economy", "energy", "entry"], "answer": 1, "explain": "economy は「経済」。経済が成長して雇用が増える、という文です。ecology は「生態（学）」。"}}, {"word": "nutrition", "pos": ["名"], "meaning": "栄養", "ex": "Good nutrition is important for staying healthy.", "exJa": "良い栄養は健康を保つために大切です。", "created": "2026-07-01", "sec": "2026年7月", "known": false, "q": {"stem": "Children need good ------- to grow strong.", "choices": ["fashion", "tradition", "position", "nutrition"], "answer": 3, "explain": "nutrition は「栄養」。子どもが丈夫に育つために必要なものです。"}}, {"word": "worried", "pos": ["形"], "meaning": "心配して", "ex": "I'm worried about my daughter because she hasn't called me today.", "exJa": "今日娘から電話がないので心配しています。", "created": "2026-06-29", "sec": "2026年6月", "known": false, "q": {"stem": "She looked ------- when she heard the news about the typhoon.", "choices": ["relaxed", "amused", "proud", "worried"], "answer": 3, "explain": "worried は「心配した」。台風のニュースを聞いたときの表情です。"}}, {"word": "bullied", "pos": ["動"], "meaning": "いじめられた", "ex": "She was bullied when she was young.", "exJa": "彼女は幼い頃いじめられていました。", "created": "2026-06-23", "sec": "2026年6月", "known": false, "q": {"stem": "He was ------- at school because of his accent.", "choices": ["praised", "bullied", "hired", "invited"], "answer": 1, "explain": "bully は「いじめる」。be bullied で「いじめられる」。アクセントのせいで、という文脈です。"}}, {"word": "abused", "pos": ["動"], "meaning": "虐待された", "ex": "Her mother abused her.", "exJa": "彼女の母親は彼女を虐待しました。", "created": "2026-06-23", "sec": "2026年6月", "known": false, "q": {"stem": "The dog had been ------- by its previous owner.", "choices": ["abused", "adopted", "admired", "adored"], "answer": 0, "explain": "abuse は「虐待する」。前の飼い主に虐待されていた犬、という文です。"}}, {"word": "complain", "pos": ["動"], "meaning": "不満を言う", "ex": "He likes to complain about the weather.", "exJa": "彼は天気について不満を言うのが好きです。", "created": "2026-06-23", "sec": "2026年6月", "known": false, "q": {"stem": "If the soup is cold, you should ------- to the waiter.", "choices": ["compare", "complete", "complain", "compete"], "answer": 2, "explain": "complain は「不満を言う」。complain to 人 / about 物 の形で使います。"}}, {"word": "typical", "pos": ["形"], "meaning": "典型的な", "ex": "It is a typical Japanese drama.", "exJa": "それは典型的な日本のドラマです。", "created": "2026-06-23", "sec": "2026年6月", "known": false, "q": {"stem": "It's ------- of him to be late for everything.", "choices": ["tropical", "technical", "typical", "terrible"], "answer": 2, "explain": "typical は「典型的な、いつもの」。\"It's typical of 人 to 〜\" で「〜するのはその人らしい」。"}}, {"word": "prepare", "pos": ["動"], "meaning": "準備する", "ex": "I am preparing for the interview.", "exJa": "面接の準備をしています。", "created": "2026-06-23", "sec": "2026年6月", "known": false, "q": {"stem": "I need to ------- dinner before the guests arrive.", "choices": ["prepare", "repair", "compare", "appear"], "answer": 0, "explain": "prepare は「準備する」。お客さんが来る前に夕食を用意する、という文です。"}}, {"word": "encourage", "pos": ["動"], "meaning": "励ます、勧める", "def": "to give someone confidence to do something", "ex": "My co-workers encouraged me to try it.", "exJa": "同僚たちは私にやってみるよう励ましてくれました。", "created": "2026-06-07", "sec": "2026年6月", "known": false, "q": {"stem": "My teacher ------- me to apply for the scholarship.", "choices": ["discouraged", "forbade", "ignored", "encouraged"], "answer": 3, "explain": "encourage 人 to 動詞 で「人に〜するよう励ます・勧める」。discourage は逆の「思いとどまらせる」。"}}, {"word": "connection", "pos": ["名"], "meaning": "つながり、結びつき", "def": "a feeling of closeness", "ex": "I felt a connection with the turtles.", "exJa": "ウミガメたちとのつながりを感じました。", "created": "2026-06-07", "sec": "2026年6月", "known": false, "q": {"stem": "I felt an instant ------- with her when we first met.", "choices": ["collection", "connection", "correction", "direction"], "answer": 1, "explain": "connection は「心のつながり」。初対面ですぐに通じ合った、という文です。"}}, {"word": "bond", "pos": ["名"], "meaning": "絆", "def": "a strong connection", "ex": "I felt a strong bond with the turtles.", "exJa": "ウミガメたちと強い絆を感じました。", "created": "2026-06-07", "sec": "2026年6月", "known": false, "q": {"stem": "Twins often share a very close -------.", "choices": ["bond", "band", "bend", "bound"], "answer": 0, "explain": "bond は「絆、強い結びつき」。双子の間の強いつながりです。"}}, {"word": "instructor", "pos": ["名"], "meaning": "インストラクター、指導者", "def": "a person who teaches a skill", "ex": "The instructor taught me for one hour.", "exJa": "インストラクターが1時間教えてくれました。", "created": "2026-06-07", "sec": "2026年6月", "known": true, "q": {"stem": "Our yoga ------- showed us how to breathe properly.", "choices": ["inspector", "investor", "instructor", "inventor"], "answer": 2, "explain": "instructor は「技能を教える人」。ヨガの呼吸法を教えてくれる人です。"}}, {"word": "get my point across", "pos": ["句"], "meaning": "言いたいことを伝える", "def": "explain what you want to say clearly", "ex": "I couldn't get my point across in English.", "exJa": "英語で言いたいことを伝えられませんでした。", "created": "2026-05-15", "sec": "2026年5月", "known": false, "q": {"stem": "I used gestures to ------- when I couldn't find the right words.", "choices": ["get my hands dirty", "get my point across", "get my act together", "get my feet wet"], "answer": 1, "explain": "get one's point across は「自分の言いたいことを相手に伝える」。言葉が出ないときジェスチャーで、という文です。"}}, {"word": "insular", "pos": ["形"], "meaning": "内向きの、島国的な、閉鎖的な", "def": "only interested in your own country or group", "ex": "Japanese news feels very insular.", "exJa": "日本のニュースはとても内向きに感じます。", "created": "2026-05-15", "sec": "2026年5月", "known": false, "q": {"stem": "Small villages can be quite ------- and suspicious of outsiders.", "choices": ["inclusive", "informal", "instant", "insular"], "answer": 3, "explain": "insular は「外に関心を持たない、閉鎖的な」。よそ者を警戒する小さな村の描写です。"}}, {"word": "emotional", "pos": ["形"], "meaning": "感情的な、感情を表に出す", "def": "showing strong feelings", "ex": "He was very emotional during the interview.", "exJa": "彼はインタビューの間とても感情的になっていました。", "created": "2026-05-15", "sec": "2026年5月", "known": true, "q": {"stem": "She got very ------- at her daughter's graduation.", "choices": ["practical", "physical", "official", "emotional"], "answer": 3, "explain": "emotional は「感情があふれる」。娘の卒業式で涙ぐむような場面です。"}}, {"word": "heavy traffic", "pos": ["名"], "meaning": "渋滞", "ex": "There was heavy traffic during Golden Week.", "exJa": "ゴールデンウィーク中は渋滞していました。", "created": "2026-05-11", "sec": "2026年5月", "known": true, "q": {"stem": "We were late because of ------- on the highway.", "choices": ["heavy rain", "heavy traffic", "heavy metal", "heavy lifting"], "answer": 1, "explain": "heavy traffic は「交通量が多いこと＝渋滞」。高速道路で遅れた理由です。"}}, {"word": "expectations", "pos": ["名"], "meaning": "期待", "ex": "The movie did not match my expectations.", "exJa": "その映画は私の期待に合いませんでした。", "created": "2026-05-11", "sec": "2026年5月", "known": true, "q": {"stem": "The hotel exceeded all my -------; it was wonderful.", "choices": ["expectations", "explanations", "exceptions", "exhibitions"], "answer": 0, "explain": "expectations は「期待」。\"exceed one's expectations\" で「期待を上回る」。"}}, {"word": "underwater tunnel", "pos": ["名"], "meaning": "海底トンネル", "ex": "We drove through an underwater tunnel.", "exJa": "私たちは海底トンネルを車で通りました。", "created": "2026-05-11", "sec": "2026年5月", "known": true, "q": {"stem": "The ------- connects the island to the mainland by road.", "choices": ["upper floor", "outdoor pool", "underwater tunnel", "underground parking"], "answer": 2, "explain": "underwater tunnel は「海底トンネル」。島と本土を道路でつなぐものです。"}}, {"word": "disappointed", "pos": ["形"], "meaning": "失望した、がっかりした", "ex": "Her son was disappointed after the game.", "exJa": "彼女の息子は試合の後がっかりしていました。", "created": "2026-05-11", "sec": "2026年5月", "known": true, "q": {"stem": "I was ------- that the concert was canceled.", "choices": ["delighted", "surprised", "disappointed", "relieved"], "answer": 2, "explain": "disappointed は「がっかりした」。コンサートが中止になったときの気持ちです。"}}, {"word": "sore throat", "pos": ["名"], "meaning": "喉の痛み", "ex": "He had a sore throat before camp.", "exJa": "彼はキャンプの前に喉が痛かったです。", "created": "2026-05-11", "sec": "2026年5月", "known": true, "q": {"stem": "I have a ------- so I can't talk much today.", "choices": ["sore throat", "sprained ankle", "runny nose", "black eye"], "answer": 0, "explain": "sore throat は「喉の痛み」。あまり話せない理由として自然です。"}}, {"word": "anchor / announcer", "pos": ["名"], "meaning": "ニュースキャスター、アナウンサー", "def": "a person who presents or reads news on TV or radio.", "ex": "She works as a news announcer for TV Asahi.", "exJa": "彼女はテレビ朝日のニュースアナウンサーとして働いています。", "created": "2026-05-07", "sec": "2026年5月", "known": true, "q": {"stem": "The ------- introduced the weather report at the end of the news.", "choices": ["audience", "advertiser", "assistant", "announcer"], "answer": 3, "explain": "announcer は「アナウンサー」。ニュースの最後に天気予報を紹介する人です。"}}, {"word": "traffic accident", "pos": ["名"], "meaning": "交通事故", "ex": "There was a traffic accident in Fukushima.", "exJa": "福島で交通事故がありました。", "created": "2026-05-07", "sec": "2026年5月", "known": true, "q": {"stem": "The road was closed because of a ------- this morning.", "choices": ["traffic light", "traffic accident", "train ticket", "trash can"], "answer": 1, "explain": "traffic accident は「交通事故」。道路が閉鎖された理由です。"}}, {"word": "epicenter", "pos": ["名"], "meaning": "震源地", "ex": "The epicenter of the earthquake was near the city.", "exJa": "地震の震源地は市の近くでした。", "created": "2026-05-03", "sec": "2026年5月", "known": false, "q": {"stem": "The ------- of the earthquake was 50 kilometers off the coast.", "choices": ["epicenter", "episode", "equator", "entrance"], "answer": 0, "explain": "epicenter は「震源地」。沖合50キロ、という地震の説明です。"}}, {"word": "pull an all-nighter", "pos": ["句"], "meaning": "徹夜する", "ex": "I had to pull an all-nighter to finish my project.", "exJa": "プロジェクトを終わらせるために徹夜しなければなりませんでした。", "created": "2026-05-03", "sec": "2026年5月", "known": true, "q": {"stem": "I had to ------- to finish the report by the deadline.", "choices": ["take a rain check", "call it a day", "pull an all-nighter", "hit the sack"], "answer": 2, "explain": "pull an all-nighter は「徹夜する」。締め切りに間に合わせるため、という文脈です。hit the sack は「寝る」。"}}, {"word": "diplomatically", "pos": ["副"], "meaning": "外交的に、外交面で", "ex": "Japan and Taiwan are close diplomatically.", "exJa": "日本と台湾は外交的に近いです。", "created": "2026-05-03", "sec": "2026年5月", "known": true, "q": {"stem": "The two countries are ------- close and often hold talks.", "choices": ["physically", "diplomatically", "musically", "medically"], "answer": 1, "explain": "diplomatically は「外交的に」。よく会談を行う2国の関係です。"}}, {"word": "culturally", "pos": ["副"], "meaning": "文化的に", "ex": "The two countries are very similar culturally.", "exJa": "その2国は文化的にとても似ています。", "created": "2026-05-03", "sec": "2026年5月", "known": true, "q": {"stem": "Japan and Korea are ------- similar in many ways.", "choices": ["chemically", "commercially", "cheaply", "culturally"], "answer": 3, "explain": "culturally は「文化的に」。日本と韓国の共通点を述べる文です。"}}, {"word": "-proof", "pos": ["形"], "meaning": "〜を防ぐ、耐〜の（接尾辞）", "ex": "This phone is waterproof.", "exJa": "このスマホは防水です。", "created": "2026-05-03", "sec": "2026年5月", "known": true, "q": {"stem": "This watch is water-------, so you can swim with it.", "choices": ["free", "less", "full", "proof"], "answer": 3, "explain": "-proof は「〜を防ぐ」という意味の接尾辞。waterproof（防水）、soundproof（防音）など。"}}, {"word": "jealous", "pos": ["形"], "meaning": "嫉妬した、妬んだ", "ex": "She felt jealous when her friend got a new phone.", "exJa": "友達が新しいスマホを買ったとき、彼女は嫉妬しました。", "created": "2026-04-29", "sec": "2026年4月", "known": false, "q": {"stem": "He gets ------- when his girlfriend talks to other men.", "choices": ["generous", "jealous", "nervous", "famous"], "answer": 1, "explain": "jealous は「嫉妬した」。恋人が他の男性と話すと嫉妬する、という文です。"}}, {"word": "seafood", "pos": ["名"], "meaning": "海産物、シーフード", "ex": "I love eating seafood, especially shrimp and crab.", "exJa": "私はシーフード、特にエビとカニを食べるのが大好きです。", "created": "2026-04-29", "sec": "2026年4月", "known": true, "q": {"stem": "Hokkaido is famous for its fresh -------, like crab and scallops.", "choices": ["seafood", "dessert", "noodles", "bread"], "answer": 0, "explain": "seafood は「海産物」。カニやホタテが例に挙がっています。"}}, {"word": "envy", "pos": ["動"], "meaning": "羨む、妬む", "ex": "I envy her for her confidence.", "exJa": "彼女の自信が羨ましいです。", "created": "2026-04-29", "sec": "2026年4月", "known": true, "q": {"stem": "I ------- people who can speak three languages.", "choices": ["enjoy", "enter", "envy", "employ"], "answer": 2, "explain": "envy は「羨む」。3か国語を話せる人が羨ましい、という文です。名詞「嫉妬」の意味もあります。"}}, {"word": "inquiry-based learning", "pos": ["名"], "meaning": "探究学習", "ex": "I teach inquiry-based learning to students.", "exJa": "私は生徒に探究学習を教えています。", "created": "2026-04-27", "sec": "2026年4月", "known": true, "q": {"stem": "In -------, students ask their own questions and look for answers.", "choices": ["distance learning", "rote learning", "inquiry-based learning", "lifelong learning"], "answer": 2, "explain": "inquiry-based learning は生徒が自ら問いを立てて答えを探す「探究学習」。rote learning は「丸暗記学習」。"}}, {"word": "side job", "pos": ["名"], "meaning": "副業", "ex": "Teaching is my side job.", "exJa": "教えることは私の副業です。", "created": "2026-04-27", "sec": "2026年4月", "known": true, "q": {"stem": "She has a ------- as a translator on weekends.", "choices": ["side job", "full-time job", "dream job", "day job"], "answer": 0, "explain": "side job は「副業」。週末に翻訳の仕事、という文脈です。day job は「本業」。"}}, {"word": "variety", "pos": ["名"], "meaning": "多様性、バラエティ", "ex": "I like variety in my work.", "exJa": "仕事に変化があるのが好きです。", "created": "2026-04-27", "sec": "2026年4月", "known": true, "q": {"stem": "The buffet offers a wide ------- of dishes from around the world.", "choices": ["quality", "quantity", "society", "variety"], "answer": 3, "explain": "variety は「多様性」。\"a wide variety of 〜\" で「さまざまな〜」。"}}, {"word": "pressure", "pos": ["名"], "meaning": "圧力、プレッシャー", "ex": "My job has a lot of pressure.", "exJa": "私の仕事はプレッシャーが大きいです。", "created": "2026-04-27", "sec": "2026年4月", "known": true, "q": {"stem": "I'm under a lot of ------- at work this month.", "choices": ["leisure", "pressure", "treasure", "measure"], "answer": 1, "explain": "pressure は「プレッシャー」。\"be under pressure\" で「プレッシャーを受けている」。"}}, {"word": "improve", "pos": ["動"], "meaning": "改善する、上達する", "ex": "I want to improve my English.", "exJa": "英語を上達させたいです。", "created": "2026-04-27", "sec": "2026年4月", "known": true, "q": {"stem": "Your English will ------- if you practice every day.", "choices": ["improve", "impress", "import", "imagine"], "answer": 0, "explain": "improve は「上達する、良くなる」。毎日練習すれば英語が上達する、という文です。"}}, {"word": "mood", "pos": ["名"], "meaning": "気分", "ex": "I'm in a good mood today.", "exJa": "今日は気分がいいです。", "created": "2026-04-25", "sec": "2026年4月", "known": true, "q": {"stem": "Don't talk to him now; he's in a bad -------.", "choices": ["food", "wood", "mood", "hood"], "answer": 2, "explain": "mood は「気分」。\"in a bad mood\" で「機嫌が悪い」。"}}, {"word": "energetic", "pos": ["形"], "meaning": "エネルギッシュな、元気な", "ex": "I feel energetic after exercising.", "exJa": "運動した後は元気が出ます。", "created": "2026-04-25", "sec": "2026年4月", "known": true, "q": {"stem": "My son is so ------- that he never sits still.", "choices": ["exhausted", "energetic", "elderly", "elegant"], "answer": 1, "explain": "energetic は「元気いっぱいの」。じっと座っていられない息子の様子です。exhausted は「疲れ切った」。"}}, {"word": "supplements", "pos": ["名"], "meaning": "サプリメント", "ex": "Some people take supplements every morning.", "exJa": "毎朝サプリメントを飲む人もいます。", "created": "2026-04-25", "sec": "2026年4月", "known": true, "q": {"stem": "I take vitamin ------- because I don't eat many vegetables.", "choices": ["instruments", "documents", "ornaments", "supplements"], "answer": 3, "explain": "supplements は「サプリメント」。野菜不足を補うビタミン剤です。"}}, {"word": "meal", "pos": ["名"], "meaning": "食事", "ex": "Dinner is my favorite meal of the day.", "exJa": "夕食は1日の中で一番好きな食事です。", "created": "2026-04-25", "sec": "2026年4月", "known": true, "q": {"stem": "Breakfast is the most important ------- of the day.", "choices": ["meat", "deal", "mall", "meal"], "answer": 3, "explain": "meal は「食事」。朝食は1日で最も大切な食事、という定番表現です。"}}, {"word": "appetizing", "pos": ["形"], "meaning": "食欲をそそる", "ex": "The food looked very appetizing.", "exJa": "その料理はとても食欲をそそりました。", "created": "2026-04-25", "sec": "2026年4月", "known": true, "q": {"stem": "The smell from the bakery was so ------- that I went in.", "choices": ["disgusting", "appetizing", "boring", "freezing"], "answer": 1, "explain": "appetizing は「食欲をそそる」。パン屋の香りに誘われて入った、という文です。"}}];
+const DRILLS = [];
+WORDS.forEach((w,i)=>{ w.id = w.id || (w.word+'#'+i); w.idx = i; });
+
+/* ---------- storage ---------- */
+let KEY=null;   // 利用者ごとの保存先（ログイン時に決まる）
+let DB={s:{},log:{},cat:{},qs:{},cfg:{levels:[],size:20,newPerDay:20,goal:30},profile:{}};
+function save(){ if(!KEY) return; try{ localStorage.setItem(KEY, JSON.stringify(DB)); }catch(e){} }
+
+const DAY=864e5, MIN=6e4;
+const IVL=[0,1,3,7,14,30,60]; // days per box
+const dkey=d=>{const z=new Date(d);return z.getFullYear()+'-'+String(z.getMonth()+1).padStart(2,'0')+'-'+String(z.getDate()).padStart(2,'0');};
+const today=()=>dkey(Date.now());
+function st(w){ return DB.s[w.id] || null; }
+function ensure(w){ return DB.s[w.id] ||= {box:0,due:0,ok:0,ng:0,seen:0}; }
+function logAns(ok){ const d=DB.log[today()] ||= {n:0,ok:0}; d.n++; if(ok) d.ok++; addXP(ok?10:3); }
+
+function grade(w, g){ // g: 0 again, 1 hard, 2 good
+  const s=ensure(w), now=Date.now(); s.seen++;
+  if(g===0){ s.box=0; s.due=now+10*MIN; s.ng++; }
+  else if(g===1){ s.box=Math.max(1,s.box); s.due=now+Math.max(1,IVL[s.box]/2)*DAY; }
+  else { s.box=Math.min(6,s.box+1); s.due=now+IVL[s.box]*DAY; s.ok++; }
+  s.last=now; const d=DB.log[today()] ||= {n:0,ok:0}; d.c=(d.c||0)+1; addXP(2); save();
+}
+function quizResult(w, ok){
+  const s=ensure(w), now=Date.now(); s.seen++;
+  if(ok){ s.ok++; if(s.due<=now){ s.box=Math.min(6,s.box+1); s.due=now+IVL[s.box]*DAY; } }
+  else { s.ng++; s.box=0; s.due=now+10*MIN; }
+  s.last=now; logAns(ok); save();
+}
+function status(w){
+  const s=st(w); if(!s||!s.seen) return 'new';
+  if(s.box>=4) return 'master';
+  if(s.ng>0 && s.box<=1) return 'weak';
+  return 'learning';
+}
+const STATUS={new:{l:'未学習',c:'var(--line)'},learning:{l:'学習中',c:'var(--blue)'},weak:{l:'苦手',c:'var(--bad)'},master:{l:'定着',c:'var(--good)'}};
+
+/* ---------- helpers ---------- */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[a[i],a[j]]=[a[j],a[i]];}return a;};
+const grp=w=>w.level?String(w.level):(w.sec||'その他');
+const grpLabel=g=>/^\d+$/.test(g)?`Score ${g}`:g;
+const LEVELS=[...new Set(WORDS.map(grp))].sort((a,b)=>(/^\d/.test(b)-/^\d/.test(a))||a.localeCompare(b,'ja',{numeric:true}));
+function pool(){ const L=DB.cfg.levels.map(String); const P=L.length? WORDS.filter(w=>L.includes(grp(w))) : WORDS; return P.length?P:WORDS; }
+function dueList(){ const now=Date.now(); return pool().filter(w=>{const s=st(w);return s&&s.seen&&s.due<=now;}).sort((a,b)=>st(a).due-st(b).due); }
+function newToday(){ const t=today(); return pool().filter(w=>{const s=st(w); return s&&s.first===t;}).length; }
+function newList(){ return pool().filter(w=>status(w)==='new'); }
+function weakList(){ return pool().filter(w=>{const s=st(w);return s&&s.ng>0;}).sort((a,b)=>(st(b).ng-st(b).ok*.5)-(st(a).ng-st(a).ok*.5)); }
+function posTags(w){ return (w.pos||[]).map(p=>`<span class="pos">${esc(p)}</span>`).join(''); }
+function markWord(sentence, word){
+  const base=word.split(' ')[0].replace(/e$/,'').replace(/y$/,'');
+  const re=new RegExp('\\b('+base.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'[a-z]*)','i');
+  return esc(sentence).replace(re,'<mark>$1</mark>');
+}
+const SPEAK_SVG='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9v6h4l5 4V5L8 9z"/><path d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>';
+function speak(text){
+  try{ const u=new SpeechSynthesisUtterance(text); u.lang='en-US'; u.rate=.95; speechSynthesis.cancel(); speechSynthesis.speak(u); }catch(e){}
+}
+
+/* ---------- router ---------- */
+let TAB='home', SESSION=null;
+function go(tab){ TAB=tab; SESSION=null; render(); window.scrollTo(0,0); }
+document.querySelectorAll('nav.tabs button').forEach(b=>b.onclick=()=>go(b.dataset.tab));
+function render(){
+  document.querySelectorAll('nav.tabs button').forEach(b=>{ const t={drills:'quiz',settings:'home'}[TAB]||TAB; if(b.dataset.tab===t) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current'); });
+  if(!WORDS.length){ $('#app').innerHTML='<div class="empty">単語データがありません。</div>'; return; }
+  if(!ME) return renderLogin();
+  if(SESSION) return SESSION.render();
+  ({home:renderHome,cards:renderCardsMenu,quiz:renderQuizMenu,list:renderList,settings:renderSettings,drills:renderDrillMenu})[TAB]();
+}
+
+/* ---------- motivation: XP, level, daily goal ---------- */
+function addXP(n){ DB.xp=(DB.xp||0)+n; const d=DB.log[today()] ||= {n:0,ok:0}; d.xp=(d.xp||0)+n; }
+function lvInfo(xp=DB.xp||0){ let lv=1, need=100, base=0; while(xp>=base+need){ base+=need; lv++; need=100+ (lv-1)*50; } return {lv, cur:xp-base, need}; }
+function doneOn(k){ const d=DB.log[k]; return d? (d.n||0)+(d.c||0) : 0; }
+function streakDays(){ let s=0; for(let i=0;i<1000;i++){ const k=dkey(Date.now()-i*DAY); if(doneOn(k)) s++; else if(i>0) break; } return s; }
+function recentRate(){ // 直近の問題の正答率（qsのうち最近の解答）
+  const qs=Object.values(DB.qs||{}).filter(q=>q.last).sort((a,b)=>b.last-a.last).slice(0,100);
+  const all=Object.values(DB.log); const n=all.reduce((a,d)=>a+(d.n||0),0), ok=all.reduce((a,d)=>a+(d.ok||0),0);
+  if(qs.length>=10){ const nn=qs.reduce((a,q)=>a+q.n,0), oo=qs.reduce((a,q)=>a+q.ok,0); return nn?Math.round(oo/nn*100):null; }
+  return n?Math.round(ok/n*100):null;
+}
+const IC={
+  cards:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6" width="13" height="15" rx="2.5"/><path d="M8 3h10a2.5 2.5 0 0 1 2.5 2.5V17"/></svg>',
+  spark:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5L18 18M6 18l2.5-2.5M15.5 8.5L18 6"/></svg>',
+  target:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1" fill="currentColor"/></svg>',
+  book:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v15H6.5A2.5 2.5 0 0 0 4 20.5z"/><path d="M4 20.5A2.5 2.5 0 0 0 6.5 23H20v-5"/><path d="M9 8h7"/></svg>',
+  pen:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/></svg>',
+  swap:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4L3 8l4 4M3 8h14M17 20l4-4-4-4M21 16H7"/></svg>',
+  shuffle:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg>',
+  alert:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9.5 17h-19z"/><path d="M12 10v4M12 17.5v.5"/></svg>',
+  fire:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c1 3.5-1.5 5-1.5 7.5 0 1.3.9 2.3 2 2.3 1.4 0 2.2-1.2 2-3 2.3 1.6 3.5 4.1 3.5 6.7A6 6 0 0 1 12 21.5 6 6 0 0 1 6 15.5C6 10 12 7.5 12 2z"/></svg>',
+  star:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.8l2.8 5.9 6.4.8-4.7 4.4 1.2 6.3L12 17.1 6.3 20.2l1.2-6.3L2.8 9.5l6.4-.8z"/></svg>',
+  play:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13a1 1 0 0 0 1.5.9l10-6.5a1 1 0 0 0 0-1.7l-10-6.5A1 1 0 0 0 8 5.5z"/></svg>',
+  chev:'<svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>',
+};
+function ring(pct,size,stroke,color,track,inner,grad){
+  const r=(size-stroke)/2, c=2*Math.PI*r, off=c*(1-Math.max(0,Math.min(1,pct)));
+  const gid='g'+Math.random().toString(36).slice(2,7);
+  return `<div class="ring" style="width:${size}px;height:${size}px"><svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+    ${grad?`<defs><linearGradient id="${gid}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="var(--accent-2)"/><stop offset="1" stop-color="var(--accent)"/></linearGradient></defs>`:''}
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${track}" stroke-width="${stroke}"/>
+    <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="${grad?`url(#${gid})`:color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${c.toFixed(2)}" stroke-dashoffset="${off.toFixed(2)}"/>
+  </svg><div class="in">${inner}</div></div>`;
+}
+function startCatTraining(cat){
+  const B=bank().filter(q=>q.cat===cat);
+  const items=weightedPick(B,DB.cfg.size,q=>{const s=DB.qs[q.qid]; return (q.src?1.5:1)*(s?(s.wrong?3:.5):1.2);}).map(b=>fromBank(b));
+  startItems(items,cat+'を強化',{again:()=>startCatTraining(cat),follow:true});
+}
+
+/* ---------- home ---------- */
+function renderHome(){
+  const P=pool(), counts={new:0,learning:0,weak:0,master:0};
+  P.forEach(w=>counts[status(w)]++);
+  const due=dueList().length;
+  const goal=DB.cfg.goal, done=doneOn(today()), gp=Math.min(1,done/goal);
+  const streak=streakDays(), L=lvInfo(), rate=recentRate();
+  const newLeft=Math.min(Math.max(0,DB.cfg.newPerDay-newToday()),newList().length);
+  const h=new Date().getHours();
+  const hello=h<5?'夜おそくまでお疲れさまです':h<11?'おはようございます':h<18?'こんにちは':'こんばんは';
+  const left=goal-done;
+  // weak categories
+  const cats=CATS.map(c=>({c,...catStat(c)})).filter(r=>r.n>=3).map(r=>({...r,p:Math.round(r.ok/r.n*100)})).sort((a,b)=>a.p-b.p);
+  const weakest=cats[0];
+  // week
+  const days=[...Array(7)].map((_,i)=>{ const t=Date.now()-(6-i)*DAY; return {k:dkey(t), d:new Date(t), n:doneOn(dkey(t))}; });
+  const maxN=Math.max(goal,...days.map(d=>d.n))*1.1;
+  const WD='日月火水木金土';
+  const drillDone=DQ.filter(q=>DB.qs[q.qid]).length;
+  const mPct=P.length?Math.round(counts.master/P.length*100):0;
+  const pct=k=>P.length?counts[k]/P.length*100:0;
+
+  $('#app').innerHTML=`<div class="stack pop">
+    <section class="hero">
+      <div class="hero-top">
+        <div class="hello">${hello}<b>${esc(ME.name)}さん</b></div>
+        <div class="pills"><span class="pill fire" title="連続学習日数">${IC.fire}${streak}日</span><span class="pill">Lv ${L.lv}</span><button class="pill me" id="toSettings" aria-label="アカウントと設定">${avatar(ME,24)}</button></div>
+      </div>
+      <div class="tgt">${APP.toeic&&DB.profile.target?`<span>目標 <b class="num">${DB.profile.target}</b>点</span>`:''}${daysLeft()!==null?`<span>本番まで <b class="num">${daysLeft()}</b>日</span>`:''}${!(APP.toeic&&DB.profile.target)&&daysLeft()===null?`<span>${APP.toeic?'設定で目標スコアと受験日を入れると、計画を立てやすくなります':'設定で1日に使える時間を入れると、計画を立てやすくなります'}</span>`:''}
+      </div>
+      <div class="hero-body">
+        ${ring(gp,120,11,'','var(--ring-track)',`<span class="v" style="font-size:32px">${done}</span><span class="l num">/ ${goal}問</span><span class="l" style="margin-top:2px">今日の目標</span>`,true)}
+        <div class="kpis">
+          <div class="kpi"><span class="k">正答率（直近）</span><span class="v">${rate??'–'}<small>${rate!=null?'%':''}</small></span></div>
+          <div class="kpi"><span class="k">覚えた単語</span><span class="v">${counts.master}<small>/ ${P.length}</small></span></div>
+          <div class="kpi"><span class="k">復習待ち</span><span class="v">${due}<small>語</small></span></div>
+        </div>
+      </div>
+      <div class="hero-msg">${personalMsg(done,left,weakest,due)}</div>
+      <div class="lvbar"><span class="num">Lv ${L.lv}</span><div class="track"><i style="width:${L.cur/L.need*100}%"></i></div><span class="num">${L.cur} / ${L.need} XP</span></div>
+      <button class="cta" id="mToday">${IC.play}${done?'続きをやる':'今日の学習をはじめる'}</button>
+    </section>
+
+    <div class="sec-h"><h3>今日のメニュー</h3><span>上から順にやるのがおすすめ</span></div>
+    <div class="menu">
+      <button class="mi" id="mRevCards" style="--c:var(--blue);--c-soft:var(--blue-soft)" ${due?'':'disabled'}><span class="ico">${IC.cards}</span><span><span class="t">復習カード</span><br><span class="d">忘れかけの単語を思い出す</span></span><span class="cnt ${due?'':'done'}">${due?due+'語':'完了'}</span>${IC.chev}</button>
+      <button class="mi" id="mNew" style="--c:var(--good);--c-soft:var(--good-soft)" ${newLeft?'':'disabled'}><span class="ico">${IC.spark}</span><span><span class="t">新しい単語</span><br><span class="d">1日${DB.cfg.newPerDay}語ずつ覚える</span></span><span class="cnt ${newLeft?'':'done'}">${newLeft?newLeft+'語':'完了'}</span>${IC.chev}</button>
+      <button class="mi" id="mWeakP" style="--c:var(--accent);--c-soft:var(--accent-soft)"><span class="ico">${IC.target}</span><span><span class="t">弱点トレーニング</span><br><span class="d">${weakest?`いちばん苦手：${esc(weakest.c)}（${weakest.p}%）`:'苦手なポイントを重点的に出題'}</span></span><span class="cnt">${DB.cfg.size}問</span>${IC.chev}</button>
+      ${DRILLS.length?`<button class="mi" id="mDrill" style="--c:var(--warn);--c-soft:var(--warn-soft)"><span class="ico">${IC.book}</span><span><span class="t">公式12 Test1 の類題</span><br><span class="d">Part 5・6 と同じポイントの新作問題</span></span><span class="cnt">${drillDone}/${DQ.length}</span>${IC.chev}</button>`:''}
+    </div>
+
+    <div class="card">
+      <div class="row" style="justify-content:space-between"><h3 style="font-size:16px">この7日間</h3><span class="small muted num">合計 ${days.reduce((a,d)=>a+d.n,0)}問</span></div>
+      <div class="week">
+        <div class="goal" style="bottom:${goal/maxN*96+23}px"><span>目標 ${goal}</span></div>
+        ${days.map((d,i)=>`<div class="day ${i===6?'today':''}"><span class="n">${d.n||''}</span><div class="col ${d.n>=goal?'hit':''}" style="height:${d.n/maxN*96}px"></div><span class="wd">${i===6?'今日':WD[d.d.getDay()]}</span></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="card stack" style="gap:12px">
+      <div class="master-top"><div><h3 style="font-size:16px">単語の定着度</h3><span class="small muted">何度も正解して長く覚えている単語</span></div><div class="bigpct">${mPct}<small>%</small></div></div>
+      <div class="bar">${['master','learning','weak'].map(k=>`<i style="width:${pct(k)}%;background:${STATUS[k].c}"></i>`).join('')}</div>
+      <div class="legend">${['master','learning','weak','new'].map(k=>`<span style="--c:${STATUS[k].c}">${STATUS[k].l}<b>${counts[k]}</b></span>`).join('')}</div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="justify-content:space-between;margin-bottom:10px"><h3 style="font-size:16px">伸ばしたいポイント</h3><span class="small muted">正答率の低い順</span></div>
+      ${cats.length? cats.slice(0,3).map(r=>{const col=r.p>=80?'var(--good)':r.p>=60?'var(--warn)':'var(--bad)';
+        return `<div class="wp">${ring(r.p/100,52,6,col,'var(--surface2)',`<span class="v" style="font-size:13px">${r.p}</span>`)}<div><div class="name">${esc(r.c)}</div><div class="sub num">${r.ok} / ${r.n} 問正解</div></div><button class="btn-s" data-cat="${esc(r.c)}">強化する</button></div>`;}).join('')
+      : `<div class="placeholder"><span class="ico" style="--c:var(--accent);--c-soft:var(--accent-soft);flex:none">${IC.target}</span><span>Part 5 形式や類題を解くと、ここに苦手な出題ポイント（品詞・時制など）が表示されます。</span></div>`}
+    </div>
+  </div>`;
+  const nav=t=>()=>{TAB=t;render();window.scrollTo(0,0);};
+  $('#toSettings').onclick=()=>go('settings');
+  $('#mToday').onclick=startToday;
+  if(due) $('#mRevCards').onclick=()=>startCards(dueList(),'復習カード');
+  if(newLeft) $('#mNew').onclick=()=>startCards(newList().slice(0,newLeft),'新しい単語');
+  $('#mWeakP').onclick=()=>startWeak();
+  if($('#mDrill')) $('#mDrill').onclick=nav('drills');
+  document.querySelectorAll('[data-cat]').forEach(b=>b.onclick=()=>startCatTraining(b.dataset.cat));
+}
+
+/* ---------- flash cards ---------- */
+function startToday(){
+  const due=dueList();
+  const newLeft=Math.max(0,DB.cfg.newPerDay-newToday());
+  const fresh=newList().slice(0,newLeft);
+  const q=[...due,...fresh];
+  if(!q.length){ SESSION=null; $('#app').innerHTML=`<div class="stack pop"><div class="card empty"><h2>今日の分は完了です</h2><p>新しい単語の上限（1日${DB.cfg.newPerDay}語）に達したか、復習待ちの単語がありません。<br>問題演習で力試しをしましょう。</p><button class="btn primary" onclick="startQuiz('p5')">Part 5 形式を解く</button></div></div>`; return; }
+  startCards(q,'今日の学習');
+}
+function renderCardsMenu(){
+  const L=pool();
+  const pages=[...new Set(L.map(w=>w.page).filter(Boolean))].sort((a,b)=>a-b);
+  $('#app').innerHTML=`<div class="stack pop">
+    <div><div class="eyebrow">Flash cards</div><h2>単語カード</h2></div>
+    <button class="btn primary block" id="cToday">今日の学習（復習 ${dueList().length}語 + 新規）</button>
+    <div class="card stack" style="gap:12px">
+      <b>ページを選んで覚える</b>
+      <p class="small muted" style="margin:0">本のページ順に10語ずつ確認できます。</p>
+      <div class="chips" id="pages">${pages.map(p=>{
+        const ws=L.filter(w=>w.page===p); const m=ws.filter(w=>status(w)==='master').length;
+        return `<button class="chip num" data-p="${p}" title="${m}/${ws.length} 定着">p.${p}${m===ws.length?' ✓':''}</button>`;}).join('')}</div>
+    </div>
+    <button class="btn block" id="cRand">ランダムに ${DB.cfg.size}語</button>
+  </div>`;
+  $('#cToday').onclick=startToday;
+  $('#cRand').onclick=()=>startCards(shuffle(L).slice(0,DB.cfg.size),'ランダム');
+  $('#pages').onclick=e=>{ const b=e.target.closest('[data-p]'); if(b) startCards(L.filter(w=>w.page===+b.dataset.p),'p.'+b.dataset.p); };
+}
+function startCards(list,label){
+  const s={xp0:DB.xp||0,q:list.slice(),i:0,flip:false,label,done:0,total:list.length,again:[]};
+  s.render=()=>{
+    const w=s.q[s.i];
+    if(!w){ return finishCards(s); }
+    const stt=st(w);
+    const nextLbl=g=>{ const b=stt?stt.box:0; if(g===0) return '10分後'; if(g===1) return Math.max(1,IVL[Math.max(1,b)]/2)+'日後'; return IVL[Math.min(6,b+1)]+'日後'; };
+    $('#app').innerHTML=`<div class="stack">
+      <div class="sess"><button class="btn ghost" id="quit">終了</button><div class="bar"><i style="width:${s.done/s.total*100}%"></i></div><span class="num small muted">${s.done}/${s.total}</span></div>
+      <div class="card flash pop" id="fc">
+        <div class="meta"><span class="tag">${esc(s.label)}</span><span class="tag">${esc(grpLabel(grp(w)))}</span>${w.t1&&w.sec!=='公式12 Test1'?'<span class="tag">公式12 T1 にも出題</span>':''}${w.page?`<span class="tag">p.${w.page}</span>`:''}<span class="tag" style="color:${STATUS[status(w)].c}">${STATUS[status(w)].l}</span></div>
+        <div class="row" style="justify-content:space-between;flex-wrap:nowrap"><div class="word">${esc(w.word)}</div><button class="icon-btn" id="say" aria-label="発音を聞く">${SPEAK_SVG}</button></div>
+        ${s.flip?`
+          <div class="meaning">${posTags(w)}${esc(w.meaning)}</div>${w.def?`<div class="small muted en">${esc(w.def)}</div>`:''}
+          ${w.ex?`<div class="ex"><div class="e">${markWord(w.ex,w.word)}</div><div class="j">${esc(w.exJa)}</div></div>`:''}
+        `:`<div class="hint">タップして意味を表示</div>`}
+      </div>
+      ${s.flip?`<div class="grade">
+        <button class="btn g-again" data-g="0">知らない<small>${nextLbl(0)}</small></button>
+        <button class="btn g-hard" data-g="1">あやふや<small>${nextLbl(1)}</small></button>
+        <button class="btn g-good" data-g="2">覚えた<small>${nextLbl(2)}</small></button>
+      </div>`:`<button class="btn primary block" id="show">意味を見る</button>`}
+    </div>`;
+    $('#quit').onclick=()=>go(TAB);
+    $('#say').onclick=e=>{e.stopPropagation();speak(w.word);};
+    const flip=()=>{ if(!s.flip){ s.flip=true; s.render(); } };
+    $('#fc').onclick=flip; if($('#show')) $('#show').onclick=flip;
+    document.querySelectorAll('[data-g]').forEach(b=>b.onclick=()=>{
+      const g=+b.dataset.g, x=ensure(w); if(!x.first) x.first=today();
+      grade(w,g);
+      if(g===0){ s.q.push(w); s.again.push(w); } else s.done++;
+      s.i++; s.flip=false; s.render();
+    });
+  };
+  SESSION=s; s.render(); window.scrollTo(0,0);
+}
+function finishCards(s){
+  const again=[...new Set(s.again)];
+  $('#app').innerHTML=`<div class="stack pop">
+    <div class="card stack result">
+      <div class="eyebrow">${esc(s.label)}</div>
+      <h2>Great Job!</h2>
+      <div class="burst">${ring(Math.min(1,doneOn(today())/DB.cfg.goal),150,13,'','var(--surface2)',`<span class="v" style="font-size:40px">${s.total}<span style="font-size:16px">語</span></span><span class="l">確認しました</span>`,true)}</div>
+      <span class="xp">${IC.star}+${(DB.xp||0)-s.xp0} XP</span>
+      <div class="small muted">今日の目標 ${Math.min(doneOn(today()),DB.cfg.goal)} / ${DB.cfg.goal}</div>
+    </div>
+    ${again.length?`<div class="card stack" style="gap:8px"><b>「知らない」にした単語</b>${again.map(w=>`<div><span class="en" style="font-weight:600">${esc(w.word)}</span> <span class="muted small">${esc(w.meaning)}</span></div>`).join('')}</div>`:''}
+    <button class="btn primary block" id="toQuiz">この単語で問題を解く</button>
+    <button class="btn block" id="home">ホームへ</button>
+  </div>`;
+  const ws=[...new Map(s.q.map(w=>[w.id,w])).values()];
+  $('#toQuiz').onclick=()=>startQuiz('p5',ws,s.label);
+  $('#home').onclick=()=>go('home');
+  SESSION=null;
+}
+
+/* ---------- quizzes ---------- */
+function renderQuizMenu(){
+  const QI={qP5:[IC.pen,'--blue'],qMean:[IC.cards,'--good'],qRev:[IC.swap,'--warn'],qMix:[IC.shuffle,'--blue'],qWeak:[IC.target,'--accent']};
+  const opt=(id,t,d)=>`<button class="mode" id="${id}"><span class="ico" style="--c:var(${QI[id][1]});--c-soft:var(${QI[id][1]}-soft)">${QI[id][0]}</span><span class="t">${t}</span><span class="d">${d}</span><span class="n">${DB.cfg.size}問</span></button>`;
+  $('#app').innerHTML=`<div class="stack pop">
+    <div><div class="eyebrow">Practice</div><h2>問題</h2></div>
+    <div class="modes">
+      ${opt('qP5','Part 5 形式','空所に入る最も適切な語を選ぶ本番形式。語形（品詞）問題と語彙問題の両方が出ます。')}
+      ${opt('qMean','意味4択','英単語 → 日本語の意味')}
+      ${opt('qRev','英語を答える','日本語の意味 → 英単語')}
+      ${opt('qMix','ミックス','3つの形式をまぜて出題')}
+      ${opt('qWeak','弱点トレーニング','苦手なポイントを重点的に。間違えると似た問題が続けて出ます。')}
+      ${DRILLS.length?`<button class="mode" id="qDrill"><span class="ico" style="--c:var(--warn);--c-soft:var(--warn-soft)">${IC.book}</span><span class="t">公式12 Test1 の類題</span><span class="d">Part 5・6 と同じポイントを問う新しい問題。問題番号ごとにも選べます。</span><span class="n">${DQ.length}問</span></button>`:''}
+    </div>
+    ${weakCard()}
+    <p class="small muted" style="margin:0">問題数と出題レベルは <button class="btn ghost small" style="min-height:0;padding:0;color:var(--accent)" id="toS">設定</button> で変えられます。Part 5 形式・類題では、間違えると同じポイントの似た問題が続けて出ます。</p>
+  </div>`;
+  $('#qP5').onclick=()=>startQuiz('p5');
+  $('#qMean').onclick=()=>startQuiz('mean');
+  $('#qRev').onclick=()=>startQuiz('rev');
+  $('#qMix').onclick=()=>startQuiz('mix');
+  $('#qWeak').onclick=()=>startWeak();
+  if($('#qDrill')) $('#qDrill').onclick=()=>{TAB='drills';render();window.scrollTo(0,0);};
+  $('#toS').onclick=()=>go('settings');
+}
+function pickForQuiz(n){
+  // weight: weak 3, learning 2, new 1.5, master 1
+  const W={weak:3,learning:2,new:1.5,master:1};
+  return pool().map(w=>({w,k:Math.random()**(1/W[status(w)])})).sort((a,b)=>b.k-a.k).slice(0,n).map(x=>x.w);
+}
+function distract(w,field,n=3){
+  const p0=(w.pos||[])[0];
+  const same=shuffle(WORDS.filter(x=>x!==w && x[field]!==w[field] && (x.pos||[])[0]===p0));
+  const other=shuffle(WORDS.filter(x=>x!==w && x[field]!==w[field]));
+  const out=[]; for(const x of [...same,...other]){ if(!out.some(o=>o[field]===x[field])) out.push(x); if(out.length>=n) break; }
+  return out;
+}
+/* ---------- Part 5 question bank & weak-point tracking ---------- */
+const CATS=['品詞','動詞の形','前置詞・接続詞','代名詞・関係詞','語彙','比較・数量','慣用表現'];
+function guessCat(ch){
+  const a=ch.map(c=>c.toLowerCase());
+  let p=0; while(p<a[0].length && a.every(c=>c[p]===a[0][p])) p++;
+  return p>=4 ? '品詞' : '語彙';
+}
+// 類題 (drills) from 公式問題集: one bank item per original item
+const DQ=[];
+DRILLS.forEach(d=>(d.items||[]).forEach((it,i)=>DQ.push({qid:'d:'+d.src+':'+i, stem:it.stem, choices:it.choices, answer:it.answer, explain:it.explain, cat:CATS.includes(d.cat)?d.cat:'語彙', src:d.src, point:d.point})));
+function wordQ(w){ return {qid:'w:'+w.id, stem:w.q.stem, choices:w.q.choices, answer:w.q.answer, explain:w.q.explain, cat:CATS.includes(w.q.cat)?w.q.cat:guessCat(w.q.choices), w}; }
+function bank(){ return [...DQ, ...pool().filter(w=>w.q&&w.q.choices).map(wordQ)]; }
+DB.cat=DB.cat||{}; DB.qs=DB.qs||{};
+function catStat(c){ return DB.cat[c]||{n:0,ok:0}; }
+function catWeak(c){ const s=catStat(c); return (s.n-s.ok+1)/(s.n+4); }   // smoothed error rate, 0.25 when unseen
+function recordQ(item,ok){
+  const c=DB.cat[item.cat] ||= {n:0,ok:0}; c.n++; if(ok) c.ok++;
+  const q=DB.qs[item.qid] ||= {n:0,ok:0}; q.n++; if(ok) q.ok++; q.last=Date.now(); q.wrong=!ok;
+  save();
+}
+function weightedPick(list,n,wf){
+  return list.map(x=>({x,k:Math.random()**(1/Math.max(.01,wf(x)))})).sort((a,b)=>b.k-a.k).slice(0,n).map(o=>o.x);
+}
+function pickWeak(n){
+  const B=bank();
+  const wrongSrc=new Set(Object.entries(DB.qs).filter(([k,v])=>v.wrong&&k.startsWith('d:')).map(([k])=>k.split(':')[1]));
+  const wrongCat=new Set(B.filter(q=>DB.qs[q.qid]?.wrong).map(q=>q.cat));
+  return weightedPick(B,n,q=>{
+    const s=DB.qs[q.qid];
+    let wt=catWeak(q.cat)*4;
+    if(q.src) wt+=1;                                      // 公式問題集ベースの類題を優先
+    if(s?.wrong) wt+=3;                                   // missed last time → ask again
+    if(q.src&&wrongSrc.has(q.src)&&!s) wt+=2.5;           // unseen sibling of a missed 類題
+    if(wrongCat.has(q.cat)) wt+=.8;
+    if(s&&s.ok&&!s.wrong&&Date.now()-s.last<DAY) wt*=.2;  // answered right today → rest
+    if(q.w&&status(q.w)==='weak') wt+=1;
+    return wt;
+  });
+}
+function similarTo(item,exclude){
+  const B=bank().filter(q=>q.qid!==item.qid&&!exclude.has(q.qid));
+  const fresh=q=>!DB.qs[q.qid]?.ok;
+  return (item.src&&shuffle(B.filter(q=>q.src===item.src&&fresh(q)))[0])
+      || shuffle(B.filter(q=>q.cat===item.cat&&q.src&&fresh(q)))[0]
+      || shuffle(B.filter(q=>q.cat===item.cat&&fresh(q)))[0] || null;
+}
+
+function makeQ(w,type){
+  if(type==='mix') type=['p5','mean','rev'][Math.random()*3|0];
+  if(type==='p5' && !(w.q&&w.q.choices)) type='mean';
+  if(type==='p5') return fromBank(wordQ(w));
+  if(type==='mean'){ const opts=shuffle([w,...distract(w,'meaning')]); return {w,type,choices:opts.map(o=>o.meaning),answer:opts.indexOf(w),en:false,opts}; }
+  const opts=shuffle([w,...distract(w,'word')]); return {w,type,choices:opts.map(o=>o.word),answer:opts.indexOf(w),en:true,opts};
+}
+function fromBank(b,extra){
+  const ord=shuffle([0,1,2,3]);
+  return Object.assign({type:'p5',en:true,qid:b.qid,cat:b.cat,src:b.src,point:b.point,w:b.w,stem:b.stem,explain:b.explain,
+    choices:ord.map(i=>b.choices[i]),answer:ord.indexOf(b.answer)},extra||{});
+}
+function startQuiz(type,list,label){
+  list = list && list.length ? shuffle(list).slice(0,DB.cfg.size) : pickForQuiz(DB.cfg.size);
+  const names={p5:'Part 5 形式',mean:'意味4択',rev:'英語を答える',mix:'ミックス'};
+  startItems(list.map(w=>makeQ(w,type)),label||names[type],{again:()=>startQuiz(type)});
+}
+function startWeak(label){
+  const items=pickWeak(DB.cfg.size).map(b=>fromBank(b));
+  startItems(items,label||'弱点トレーニング',{again:()=>startWeak(label),follow:true});
+}
+function startDrills(filter,label){
+  const B=DQ.filter(filter);
+  const items=weightedPick(B,DB.cfg.size,q=>{const s=DB.qs[q.qid]; return s?(s.wrong?3:.6):1.5;}).map(b=>fromBank(b));
+  startItems(items,label,{again:()=>startDrills(filter,label),follow:true});
+}
+function startItems(items,label,opt={}){
+  if(!items.length){ $('#app').innerHTML=`<div class="card empty">出題できる問題がありません。</div>`; return; }
+  const s={xp0:DB.xp||0,items,i:0,picked:null,results:[],label,opt,followUps:0,used:new Set(items.map(q=>q.qid).filter(Boolean))};
+  s.render=()=>{
+    const q=s.items[s.i]; if(!q) return finishQuiz(s);
+    const w=q.w, answered=s.picked!==null, ok=s.picked===q.answer;
+    const L='ABCD';
+    let prompt='';
+    const tags=q.type==='p5'?`<div class="meta">${q.follow?'<span class="tag" style="color:var(--warn);border-color:var(--warn)">似た問題</span>':''}<span class="tag">${esc(q.cat)}</span>${q.src?`<span class="tag">公式12 T1 ${esc(q.src)} の類題</span>`:''}</div>`:'';
+    if(q.type==='p5') prompt=`${tags}<div class="eyebrow">空所に入る最も適切な語を選んでください</div><div class="stem">${esc(q.stem).replace(/-{3,}/, `<span class="blank">${answered?esc(q.choices[q.answer]):'&nbsp;'}</span>`)}</div>`;
+    else if(q.type==='mean') prompt=`<div class="eyebrow">正しい意味を選んでください</div><div class="row" style="justify-content:space-between;flex-wrap:nowrap"><div class="word">${esc(w.word)}</div><button class="icon-btn" id="say" aria-label="発音を聞く">${SPEAK_SVG}</button></div>`;
+    else prompt=`<div class="eyebrow">この意味の英単語を選んでください</div><div class="meaning">${posTags(w)}${esc(w.meaning)}</div>`;
+    const cls=i=>!answered?'':(i===q.answer?'right':(i===s.picked?'wrong':''));
+    const nextQ=s.items[s.i+1];
+    $('#app').innerHTML=`<div class="stack">
+      <div class="sess"><button class="btn ghost" id="quit">終了</button><div class="bar"><i style="width:${s.i/s.items.length*100}%"></i></div><span class="num small muted">${s.i+1}/${s.items.length}</span></div>
+      <div class="card stack pop" style="gap:14px">${prompt}</div>
+      <div class="opts">${q.choices.map((c,i)=>`<button class="opt ${q.en?'en-opt':''} ${cls(i)}" data-i="${i}" ${answered?'disabled':''}><span class="bub">${answered&&(i===q.answer||i===s.picked)?(i===q.answer?'✓':'✕'):L[i]}</span><span class="tx">${esc(c)}</span></button>`).join('')}</div>
+      ${answered?`<div class="explain pop">
+        <div class="verdict ${ok?'ok':'ng'}">${ok?'正解':'不正解'}　<span class="small muted" style="font-weight:400">正解は (${L[q.answer]}) ${esc(q.choices[q.answer])}</span></div>
+        ${q.point?`<div class="small"><b>ポイント</b>　${esc(q.point)}</div>`:''}
+        ${q.explain?`<div class="small">${esc(q.explain)}</div>`:''}
+        ${w?`<div class="row" style="flex-wrap:nowrap;justify-content:space-between"><div><span class="en" style="font-weight:600;font-size:17px">${esc(w.word)}</span>　${posTags(w)}<span>${esc(w.meaning)}</span></div><button class="icon-btn" id="say2" aria-label="発音を聞く">${SPEAK_SVG}</button></div>`:''}
+        ${w&&q.type!=='p5'&&w.ex?`<div class="ex"><div class="e">${markWord(w.ex,w.word)}</div><div class="j">${esc(w.exJa)}</div></div>`:''}
+        ${q.opts&&!ok?`<div class="small muted">選んだ語：<span class="${q.type==='rev'?'en':''}">${esc(q.opts[s.picked].word)}</span> ＝ ${esc(q.opts[s.picked].meaning)}</div>`:''}
+        ${!ok&&nextQ&&nextQ.follow&&nextQ.parent===q.qid?`<div class="small" style="color:var(--warn)">同じポイントの似た問題が次に出ます。</div>`:''}
+      </div>
+      <button class="btn primary block" id="next">${nextQ?'次の問題':'結果を見る'}</button>`:''}
+    </div>`;
+    $('#quit').onclick=()=>go(TAB);
+    if($('#say')) $('#say').onclick=()=>speak(w.word);
+    if($('#say2')) $('#say2').onclick=()=>speak(w.word);
+    document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+      if(s.picked!==null) return;
+      s.picked=+b.dataset.i; const good=s.picked===q.answer;
+      if(w){ const x=ensure(w); if(!x.first) x.first=today(); quizResult(w,good); } else logAns(good);
+      if(q.type==='p5'){
+        recordQ(q,good);
+        // 間違えたら、同じポイントの似た問題をすぐ後ろに追加（1回の演習で最大5問）
+        if(!good && s.followUps<5){
+          const sim=similarTo(q,s.used);
+          if(sim){ s.used.add(sim.qid); s.followUps++; s.items.splice(s.i+1,0,fromBank(sim,{follow:true,parent:q.qid})); }
+        }
+      }
+      s.results.push({q,ok:good}); save(); s.render();
+    });
+    if($('#next')){ $('#next').onclick=()=>{ s.i++; s.picked=null; s.render(); window.scrollTo(0,0); }; $('#next').focus({preventScroll:true}); }
+  };
+  SESSION=s; s.render(); window.scrollTo(0,0);
+}
+function finishQuiz(s){
+  const n=s.results.length, ok=s.results.filter(r=>r.ok).length;
+  const missQ=s.results.filter(r=>!r.ok).map(r=>r.q);
+  const miss=[...new Map(missQ.filter(q=>q.w).map(q=>[q.w.id,q.w])).values()];
+  const missCats={}; missQ.filter(q=>q.cat).forEach(q=>missCats[q.cat]=(missCats[q.cat]||0)+1);
+  const rate=n?Math.round(ok/n*100):0;
+  const msg= rate>=90?'この範囲はほぼ定着しています。':rate>=70?'あと一歩です。間違えたところを確認しましょう。':'間違えたポイントの似た問題で、もう一度練習しましょう。';
+  $('#app').innerHTML=`<div class="stack pop">
+    <div class="card stack result">
+      <div class="eyebrow">${esc(s.label)}</div>
+      <h2>${rate>=90?'Excellent!':rate>=70?'Great Job!':rate>=50?'Nice Try!':'Keep Going!'}</h2>
+      <div class="burst">${ring(rate/100,150,13,'','var(--surface2)',`<span class="v" style="font-size:40px">${rate}<span style="font-size:16px">%</span></span><span class="l num">${ok} / ${n} 問正解</span>`,true)}</div>
+      <span class="xp">${IC.star}+${(DB.xp||0)-s.xp0} XP</span>
+      <div class="small muted">${msg}</div>
+      ${doneOn(today())>=DB.cfg.goal?`<div class="small" style="color:var(--good);font-weight:700">今日の目標（${DB.cfg.goal}問）を達成しています</div>`:`<div class="small muted">今日の目標まで あと${DB.cfg.goal-doneOn(today())}問</div>`}
+    </div>
+    ${Object.keys(missCats).length?`<div class="card stack" style="gap:6px"><b>間違えたポイント</b>${Object.entries(missCats).sort((a,b)=>b[1]-a[1]).map(([c,k])=>`<div class="row" style="justify-content:space-between"><span>${esc(c)}</span><span class="num small" style="color:var(--bad)">${k}問</span></div>`).join('')}</div>`:''}
+    ${missQ.length?`<button class="btn primary block" id="rw">間違えたポイントの似た問題を解く</button>`:''}
+    ${miss.length?`<div class="card stack" style="gap:6px"><b>間違えた単語</b>${miss.map(w=>`<div><span class="en" style="font-weight:600">${esc(w.word)}</span>　<span class="muted small">${esc(w.meaning)}</span></div>`).join('')}</div>
+    <button class="btn block" id="rc">間違えた単語をカードで確認</button>`:''}
+    ${missQ.length?`<button class="btn block" id="rq">間違えた問題だけ解き直す</button>`:''}
+    <button class="btn block" id="again">別の${DB.cfg.size}問を解く</button>
+    <button class="btn block ghost" id="home">ホームへ</button>
+  </div>`;
+  if(missQ.length){
+    $('#rw').onclick=()=>{
+      const used=new Set(missQ.map(q=>q.qid)); const items=[];
+      for(let r=0;r<3&&items.length<DB.cfg.size;r++) for(const q of missQ){ const sim=similarTo(q,used); if(sim){ used.add(sim.qid); items.push(fromBank(sim)); } }
+      startItems(items.length?items:pickWeak(DB.cfg.size).map(b=>fromBank(b)),'似た問題で復習',{again:()=>startWeak(),follow:true});
+    };
+    $('#rq').onclick=()=>startItems(shuffle(missQ).map(q=>q.type==='p5'?fromBank(bank().find(b=>b.qid===q.qid)||q):makeQ(q.w,q.type)),'解き直し',s.opt);
+  }
+  if(miss.length) $('#rc').onclick=()=>startCards(miss,'間違えた単語');
+  $('#again').onclick=()=>s.opt.again?s.opt.again():go('home');
+  $('#home').onclick=()=>go('home');
+  SESSION=null;
+}
+function weakCard(){
+  const rows=CATS.map(c=>({c,...catStat(c)})).filter(r=>r.n>0);
+  if(!rows.length) return '';
+  rows.sort((a,b)=>(a.ok/a.n)-(b.ok/b.n));
+  return `<div class="card stack" style="gap:10px">
+    <div class="row" style="justify-content:space-between"><b>出題ポイント別の正答率</b><span class="small muted">低い順</span></div>
+    ${rows.map(r=>{const p=Math.round(r.ok/r.n*100); const col=p>=80?'var(--good)':p>=60?'var(--warn)':'var(--bad)';
+      return `<div class="stack" style="gap:4px"><div class="row" style="justify-content:space-between"><span class="small">${esc(r.c)}</span><span class="num small" style="color:${col}">${p}% <span class="muted">(${r.ok}/${r.n})</span></span></div><div class="bar"><i style="width:${p}%;background:${col}"></i></div></div>`;}).join('')}
+  </div>`;
+}
+function renderDrillMenu(){
+  const bySrc=[...new Set(DRILLS.map(d=>d.src))];
+  const srcStat=src=>{ const ks=DQ.filter(q=>q.src===src).map(q=>DB.qs[q.qid]).filter(Boolean); const n=ks.reduce((a,s)=>a+s.n,0), ok=ks.reduce((a,s)=>a+s.ok,0); return {n,ok,wrong:ks.some(s=>s.wrong)}; };
+  $('#app').innerHTML=`<div class="stack pop">
+    <div class="row"><button class="btn ghost" id="back">← 戻る</button></div>
+    <div><div class="eyebrow">Official 12 · Test 1</div><h2>公式12 Test1 の類題</h2><p class="small muted" style="margin:4px 0 0">Test 1 の Part 5・6 と同じポイントを問う、新しく作った問題です。問題番号を選ぶと、その類題だけを解けます。</p></div>
+    <button class="btn primary block" id="dAll">すべての類題からランダムに ${DB.cfg.size}問</button>
+    <div class="card stack" style="gap:10px"><b>ポイント別</b>
+      <div class="chips">${CATS.filter(c=>DQ.some(q=>q.cat===c)).map(c=>`<button class="chip" data-c="${esc(c)}">${esc(c)} <span class="num small muted">${DQ.filter(q=>q.cat===c).length}</span></button>`).join('')}</div>
+    </div>
+    <div class="list">${bySrc.map(src=>{const d=DRILLS.find(x=>x.src===src), st=srcStat(src);
+      return `<button class="li" data-src="${esc(src)}" style="width:100%;text-align:left;border-left:0;border-right:0;border-bottom:0;background:none"><span class="num small" style="width:44px">${esc(src)}</span><div><div class="small" style="font-weight:700">${esc(d.cat)}</div><div class="m">${esc(d.point)}</div></div><span class="num small" style="color:${st.wrong?'var(--bad)':st.n?'var(--good)':'var(--faint)'}">${st.n?`${st.ok}/${st.n}`:'未'}</span></button>`;}).join('')}</div>
+  </div>`;
+  $('#back').onclick=()=>go('quiz');
+  $('#dAll').onclick=()=>startDrills(()=>true,'公式12 T1 類題');
+  document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>startDrills(q=>q.cat===b.dataset.c,'類題：'+b.dataset.c));
+  document.querySelectorAll('[data-src]').forEach(b=>b.onclick=()=>startDrills(q=>q.src===b.dataset.src,b.dataset.src+' の類題'));
+}
+
+/* ---------- list ---------- */
+let LF={q:'',st:'all',shown:60};
+function renderList(){
+  const P=pool();
+  const f=P.filter(w=>(LF.st==='all'||status(w)===LF.st) && (!LF.q || w.word.toLowerCase().includes(LF.q) || (w.meaning||'').includes(LF.q)));
+  const chip=(k,l)=>`<button class="chip" data-st="${k}" aria-pressed="${LF.st===k}">${l}</button>`;
+  $('#app').innerHTML=`<div class="stack pop">
+    <div class="row" style="justify-content:space-between"><div><div class="eyebrow">Word list</div><h2>単語一覧</h2></div><span class="num small muted">${f.length}語</span></div>
+    <input class="search" id="q" type="search" placeholder="英単語・意味で検索" value="${esc(LF.q)}" autocomplete="off">
+    <div class="chips" id="stf">${chip('all','すべて')}${chip('weak','苦手')}${chip('learning','学習中')}${chip('master','定着')}${chip('new','未学習')}</div>
+    <div class="list">${f.slice(0,LF.shown).map(w=>{const s=st(w);return `<div class="li" data-id="${esc(w.id)}"><span class="dot" style="--c:${STATUS[status(w)].c}" title="${STATUS[status(w)].l}"></span><div><div class="w">${esc(w.word)}</div><div class="m">${posTags(w).replace(/class="pos"/g,'class="pos" style="height:18px;min-width:18px;font-size:10.5px"')}${esc(w.meaning)}</div></div><span class="cnt">${s&&s.ng?'✕'+s.ng:''}</span></div>`;}).join('') || '<div class="empty">該当する単語がありません</div>'}
+    ${f.length>LF.shown?`<div class="more"><button class="btn" id="more">さらに表示（残り ${f.length-LF.shown}語）</button></div>`:''}</div>
+    ${f.length?`<button class="btn primary block" id="lc">表示中の単語をカードで覚える</button>`:''}
+  </div>`;
+  const q=$('#q');
+  q.oninput=()=>{ LF.q=q.value.trim().toLowerCase(); LF.shown=60; const p=q.selectionStart; renderList(); const n=$('#q'); n.focus(); n.setSelectionRange(p,p); };
+  $('#stf').onclick=e=>{const b=e.target.closest('[data-st]'); if(b){LF.st=b.dataset.st; LF.shown=60; renderList();}};
+  if($('#more')) $('#more').onclick=()=>{LF.shown+=100; renderList();};
+  if($('#lc')) $('#lc').onclick=()=>startCards(f.slice(0,DB.cfg.size*2),'一覧から');
+  document.querySelectorAll('.li').forEach(el=>el.onclick=()=>{ const w=WORDS.find(x=>x.id===el.dataset.id); speak(w.word); });
+}
+
+
+/* ---------- progress code (先生に送る用) ---------- */
+function progressCode(){
+  const c={new:0,learning:0,weak:0,master:0}; WORDS.forEach(w=>c[status(w)]++);
+  const days=[...Array(14)].map((_,i)=>{const d=DB.log[dkey(Date.now()-(13-i)*DAY)]||{}; return [d.n||0,d.ok||0,d.c||0];});
+  const cat={}; CATS.forEach(k=>{const s=catStat(k); if(s.n) cat[k]=[s.n,s.ok];});
+  const o={v:1,id:ME.id,name:ME.name,t:Date.now(),xp:DB.xp||0,lv:lvInfo().lv,streak:streakDays(),rate:recentRate(),goal:DB.cfg.goal,
+    p:{target:DB.profile.target||null,testDate:DB.profile.testDate||'',cur:DB.profile.cur??null,minutes:DB.profile.minutes||null},
+    c,days,cat,weak:weakList().slice(0,12).map(w=>w.word),seen:Object.values(DB.s).filter(s=>s.seen).length,total:WORDS.length,
+    drills:[DQ.filter(q=>DB.qs[q.qid]).length,DQ.length]};
+  return 'TD1.'+btoa(unescape(encodeURIComponent(JSON.stringify(o)))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+}
+/* ---------- settings ---------- */
+function renderSettings(){
+  const lv=DB.cfg.levels, p=DB.profile, d=daysLeft();
+  const chips=(id,list,val,fmt)=>`<div class="chips" id="${id}">${list.map(v=>`<button class="chip" data-v="${v}" aria-pressed="${String(v)===String(val)}">${fmt(v)}</button>`).join('')}</div>`;
+  const sug=suggestPlan(p);
+  $('#app').innerHTML=`<div class="stack pop">
+    <div><div class="eyebrow">Settings</div><h2>設定</h2></div>
+    <div class="card stack" style="gap:14px">
+      <div class="row" style="gap:12px;justify-content:space-between"><div class="row" style="gap:12px">${avatar(ME,48)}<div><div style="font-weight:700;font-size:17px">${esc(ME.name)}</div><div class="small muted num">Lv ${lvInfo().lv} ・ ${DB.xp||0} XP</div></div></div><button class="btn" id="logout" style="min-height:40px">ログアウト</button></div>
+      ${APP.toeic?`<div class="field" style="flex-direction:column;align-items:flex-start"><b>目標スコア</b>${chips('pTarget',TARGETS,p.target,v=>v+'点')}</div>
+      <div class="field" style="flex-direction:column;align-items:flex-start"><b>今のスコア</b>${chips('pCur',CUR_BANDS.map((_,i)=>i),p.cur,i=>CUR_BANDS[i])}</div>`:''}
+      <div class="field"><label for="pDate"><b>次に受ける日</b><br><span class="small muted">${d!==null?`あと${d}日`:'未設定'}</span></label><input type="date" id="pDate" value="${esc(p.testDate||'')}" min="${dkey(Date.now())}" class="search" style="width:auto;padding:8px 10px"></div>
+      <div class="field" style="flex-direction:column;align-items:flex-start"><b>1日に使える時間</b>${chips('pMin',MINUTES,p.minutes,v=>v+'分')}</div>
+      <div class="field" style="flex-direction:column;align-items:stretch;gap:8px"><span class="small muted">この内容でのおすすめ：1日の目標 <b class="num">${sug.goal}</b>問 ・ 新しい単語 <b class="num">${sug.newPerDay}</b>語/日</span>
+        <button class="btn" id="applySug" ${sug.goal===DB.cfg.goal&&sug.newPerDay===DB.cfg.newPerDay?'disabled':''}>${sug.goal===DB.cfg.goal&&sug.newPerDay===DB.cfg.newPerDay?'おすすめを適用中':'おすすめを適用する'}</button></div>
+    </div>
+    <div class="card">
+      <div class="field" style="flex-direction:column;align-items:flex-start"><b>出題範囲</b><span class="small muted">本の区分です。何も選ばないと全範囲から出題します。</span>
+        <div class="chips" id="lv">${LEVELS.map(l=>`<button class="chip" data-l="${esc(l)}" aria-pressed="${lv.map(String).includes(l)}">${esc(grpLabel(l))}<span class="num small muted"> ${WORDS.filter(w=>grp(w)===l).length}</span></button>`).join('')}</div></div>
+      <div class="field"><label for="goal">1日の目標（問題＋カード）</label><select id="goal">${[10,20,30,50,80,100].map(n=>`<option ${DB.cfg.goal===n?'selected':''}>${n}</option>`).join('')}</select></div>
+      <div class="field"><label for="size">1回の問題数</label><select id="size">${[10,20,30,50].map(n=>`<option ${DB.cfg.size===n?'selected':''}>${n}</option>`).join('')}</select></div>
+      <div class="field"><label for="npd">1日に覚える新しい単語</label><select id="npd">${[10,15,20,25,30,40,50].map(n=>`<option ${DB.cfg.newPerDay===n?'selected':''}>${n}</option>`).join('')}</select></div>
+    </div>
+    <div class="card stack" style="gap:10px">
+      <b>パスワードを変える</b>
+      <form id="pwf" class="stack" style="gap:8px">
+        <input class="search" id="op" type="password" placeholder="今のパスワード" autocomplete="current-password" required>
+        <input class="search" id="np" type="password" placeholder="新しいパスワード（4文字以上）" minlength="4" autocomplete="new-password" required>
+        <div id="pwmsg" class="small" hidden></div>
+        <button class="btn" type="submit">変更する</button>
+      </form>
+    </div>
+    <div class="card stack" style="gap:10px" id="shareCard">
+      <b>先生に進捗を送る</b>
+      <p class="small muted" style="margin:0">下のコードをコピーして、LINE などで先生に送ってください。コードには学習の記録だけが入っていて、パスワードは含まれません。</p>
+      <textarea class="search" id="pcode" readonly rows="3" style="font-family:var(--en);font-size:12px;word-break:break-all;resize:none">${esc(progressCode())}</textarea>
+      <button class="btn primary" id="copyCode">進捗コードをコピー</button>
+      <div id="copyMsg" class="small" hidden></div>
+    </div>
+    <div class="card stack" style="gap:8px">
+      <b>学習記録について</b>
+      <p class="small muted" style="margin:0">${esc(ME.name)}さんの記録は、この端末のこのブラウザに保存されます。ほかの端末とは共有されません。全${WORDS.length}語のうち ${Object.values(DB.s).filter(s=>s.seen).length}語を学習済みです。</p>
+      <button class="btn danger" id="reset">学習記録をリセット</button>
+      <div id="confirm" hidden class="row"><span class="small">本当に消しますか？元に戻せません。</span><button class="btn danger" id="yes">消す</button><button class="btn" id="no">やめる</button></div>
+    </div>
+    <p class="small muted" style="margin:0">単語の見出し語と意味は手持ちの単語帳から、例文と問題はオリジナルで作成しています。</p>
+  </div>`;
+  const pick=(id,key)=>$('#'+id).onclick=e=>{const b=e.target.closest('[data-v]'); if(!b) return; DB.profile[key]=+b.dataset.v; save(); renderSettings();};
+  if(APP.toeic){ pick('pTarget','target'); pick('pCur','cur'); } pick('pMin','minutes');
+  $('#pDate').onchange=e=>{DB.profile.testDate=e.target.value; save(); renderSettings();};
+  $('#applySug').onclick=()=>{Object.assign(DB.cfg,suggestPlan(DB.profile)); save(); renderSettings();};
+  $('#logout').onclick=logout;
+  $('#copyCode').onclick=async()=>{ const ta=$('#pcode'), m=$('#copyMsg'); m.hidden=false;
+    try{ await navigator.clipboard.writeText(ta.value); m.style.color='var(--good)'; m.textContent='コピーしました。LINE などに貼り付けて先生に送ってください。'; }
+    catch(e){ ta.focus(); ta.select(); m.style.color='var(--warn)'; m.textContent='コードを選択しました。長押しなどでコピーしてください。'; } };
+  $('#pwf').onsubmit=async e=>{ e.preventDefault(); const m=$('#pwmsg'); m.hidden=false;
+    if(await hashPw($('#op').value,ME.salt)!==ME.hash){ m.style.color='var(--bad)'; m.textContent='今のパスワードが違います。'; return; }
+    const np=$('#np').value; if(np.length<4){ m.style.color='var(--bad)'; m.textContent='新しいパスワードは4文字以上にしてください。'; return; }
+    const salt=Math.random().toString(36).slice(2)+Date.now().toString(36), hash=await hashPw(np,salt);
+    saveUsers(users().map(u=>u.id===ME.id?Object.assign(u,{salt,hash}):u)); ME=Object.assign(ME,{salt,hash});
+    m.style.color='var(--good)'; m.textContent='パスワードを変更しました。'; $('#op').value=''; $('#np').value=''; };
+  $('#lv').onclick=e=>{const b=e.target.closest('[data-l]'); if(!b) return; const l=b.dataset.l, cur=lv.map(String); DB.cfg.levels=cur.includes(l)?cur.filter(x=>x!==l):[...cur,l]; save(); renderSettings();};
+  $('#goal').onchange=e=>{DB.cfg.goal=+e.target.value; save();};
+  $('#size').onchange=e=>{DB.cfg.size=+e.target.value; save();};
+  $('#npd').onchange=e=>{DB.cfg.newPerDay=+e.target.value; save();};
+  $('#reset').onclick=()=>{$('#confirm').hidden=false;};
+  $('#no').onclick=()=>{$('#confirm').hidden=true;};
+  $('#yes').onclick=()=>{DB=initDB({cfg:DB.cfg,profile:DB.profile}); save(); go('home');};
+}
+
+/* ---------- accounts (この端末のブラウザ内だけに保存) ---------- */
+const UKEY=APP.key+'-users', CURKEY=APP.key+'-current', LEGACY=APP.key+'-v1';
+const lsGet=k=>{ try{ return localStorage.getItem(k); }catch(e){ return null; } };
+const lsSet=(k,v)=>{ try{ localStorage.setItem(k,v); }catch(e){} };
+const lsDel=k=>{ try{ localStorage.removeItem(k); }catch(e){} };
+const ssGet=k=>{ try{ return sessionStorage.getItem(k); }catch(e){ return null; } };
+const ssSet=(k,v)=>{ try{ sessionStorage.setItem(k,v); }catch(e){} };
+const ssDel=k=>{ try{ sessionStorage.removeItem(k); }catch(e){} };
+function users(){ try{ return JSON.parse(lsGet(UKEY))||[]; }catch(e){ return []; } }
+function saveUsers(u){ lsSet(UKEY,JSON.stringify(u)); }
+const ukey=id=>APP.key+'-u-'+id;
+let ME=null;          // current user record
+const AV_COLORS=['#3c6df0','#ff6a3d','#12a06a','#8b5cf6','#e8930c','#e5484d','#0ea5b7'];
+
+async function hashPw(pw,salt){
+  try{
+    const enc=new TextEncoder();
+    const key=await crypto.subtle.importKey('raw',enc.encode(pw),'PBKDF2',false,['deriveBits']);
+    const bits=await crypto.subtle.deriveBits({name:'PBKDF2',salt:enc.encode(salt),iterations:120000,hash:'SHA-256'},key,256);
+    return 'p2:'+[...new Uint8Array(bits)].map(b=>b.toString(16).padStart(2,'0')).join('');
+  }catch(e){ // 古いブラウザ向けの簡易版
+    let h=2166136261>>>0; const s=salt+':'+pw;
+    for(let r=0;r<4000;r++) for(let i=0;i<s.length;i++){ h^=(s.charCodeAt(i)+r)&0xffff; h=Math.imul(h,16777619)>>>0; }
+    return 'f1:'+h.toString(16);
+  }
+}
+function initDB(raw){
+  const d=raw||{};
+  d.s=d.s||{}; d.log=d.log||{}; d.cat=d.cat||{}; d.qs=d.qs||{};
+  d.cfg=Object.assign({levels:[],size:20,newPerDay:20,goal:30},d.cfg||{});
+  d.profile=d.profile||{};
+  return d;
+}
+function loginAs(u,remember){
+  ME=u; KEY=ukey(u.id);
+  let raw=null; try{ raw=JSON.parse(lsGet(KEY)); }catch(e){}
+  DB=initDB(raw);
+  ssSet(CURKEY,u.id); if(remember) lsSet(CURKEY,u.id); else lsDel(CURKEY);
+  document.body.classList.remove('locked');
+  TAB='home'; SESSION=null; render(); window.scrollTo(0,0);
+}
+function logout(){ save(); ME=null; ssDel(CURKEY); lsDel(CURKEY); DB=initDB(null); KEY=null; SESSION=null; renderLogin(); }
+
+/* ---------- personalization ---------- */
+const CUR_BANDS=['まだ受けたことがない','〜395点','400〜495点','500〜595点','600〜695点','700点以上'];
+const TARGETS=[600,650,700,730,800,860];
+const MINUTES=[10,20,30,60];
+function daysLeft(){ const t=DB.profile.testDate; if(!t) return null; const d=Math.ceil((new Date(t+'T00:00:00')-new Date(dkey(Date.now())+'T00:00:00'))/DAY); return d>=0?d:null; }
+function suggestPlan(p){
+  const goal={10:20,20:30,30:50,60:100}[p.minutes]||30;
+  let npd={10:10,20:20,30:30,60:50}[p.minutes]||20;
+  const d=p.testDate?Math.ceil((new Date(p.testDate+'T00:00:00')-Date.now())/DAY):null;
+  if(d&&d>0){ const left=WORDS.filter(w=>!(DB.s[w.id]&&DB.s[w.id].seen)).length; npd=Math.max(10,Math.min(50,Math.ceil(left/Math.max(1,d-7)/5)*5)); }
+  return {goal,newPerDay:npd};
+}
+function personalMsg(done,left,weakest,due){
+  const p=DB.profile, d=daysLeft();
+  if(d!==null&&d<=14) return d===0?'<b>今日が本番。</b>新しいことより、苦手の見直しを軽めに。':`本番まで<b>あと${d}日</b>。新しい単語より、復習と弱点を優先しましょう。`;
+  if(done===0) return due>20?`復習待ちが<b>${due}語</b>あります。まずは復習カードから。`:`今日はまだ0問。<b>まずは5問</b>から始めましょう。`;
+  if(left>0) return `今日の目標まで<b>あと${left}問</b>。${weakest?`苦手な「${esc(weakest.c)}」も少しやると効果的です。`:'この調子です。'}`;
+  return `<b>今日の目標を達成しました。</b>${APP.toeic&&p.target?`${p.target}点に向けて着実に進んでいます。`:'余裕があれば弱点を1セット。'}`;
+}
+
+/* ---------- login / register screens ---------- */
+function avatar(u,size=44){ return `<span class="av" style="width:${size}px;height:${size}px;background:${u.color};font-size:${Math.round(size*.42)}px">${esc((u.name||'?').slice(0,1))}</span>`; }
+function userSummary(u){ try{ const d=JSON.parse(lsGet(ukey(u.id)))||{}; const xp=d.xp||0; return `Lv ${lvInfo(xp).lv}`; }catch(e){ return ''; } }
+function renderLogin(sel){
+  document.body.classList.add('locked');
+  const U=users();
+  if(!U.length) return renderRegister();
+  const u=sel&&U.find(x=>x.id===sel);
+  $('#app').innerHTML=`<div class="auth pop">
+    <div class="auth-brand"><div class="logo">${IC.book}</div><div><div class="eyebrow">${esc(APP.sub)}</div><div class="brand">${esc(APP.title)}</div></div></div>
+    ${u?`
+    <div class="card stack" style="gap:14px">
+      <div class="row" style="gap:12px">${avatar(u,52)}<div><div style="font-weight:700;font-size:18px">${esc(u.name)}</div><div class="small muted num">${userSummary(u)}</div></div></div>
+      <form id="lf" class="stack" style="gap:12px">
+        <label class="lbl" for="pw">パスワード</label>
+        <input class="search" id="pw" type="password" autocomplete="current-password" required>
+        <label class="check"><input type="checkbox" id="rem"> この端末でログインしたままにする</label>
+        <div id="err" class="err" hidden></div>
+        <button class="btn primary block" type="submit">ログイン</button>
+      </form>
+      <div class="row" style="justify-content:space-between"><button class="btn ghost small" id="back">← ほかの人</button><button class="btn ghost small" id="forgot">パスワードを忘れた</button></div>
+      <div id="forgotBox" class="small muted" hidden>パスワードはこの端末の中だけに保存されているため、元に戻せません。この利用者を削除して、登録し直してください（学習記録も消えます）。
+        <div class="row" style="margin-top:8px"><button class="btn danger" id="delU">${esc(u.name)} を削除</button></div></div>
+    </div>`:`
+    <h2 style="margin:4px 2px 0">だれが勉強しますか？</h2>
+    <div class="users">${U.map(x=>`<button class="ut" data-u="${esc(x.id)}">${avatar(x,56)}<span class="n">${esc(x.name)}</span><span class="small muted num">${userSummary(x)}</span></button>`).join('')}
+      <button class="ut add" id="addU"><span class="av" style="width:56px;height:56px;background:var(--surface2);color:var(--muted);font-size:28px">＋</span><span class="n">新しく登録</span><span class="small muted">&nbsp;</span></button>
+    </div>
+    <p class="small muted" style="margin:0">記録とパスワードは、この端末のこのブラウザの中にだけ保存されます。</p>`}
+  </div>`;
+  if(u){
+    $('#pw').focus();
+    $('#lf').onsubmit=async e=>{ e.preventDefault(); const h=await hashPw($('#pw').value,u.salt);
+      if(h===u.hash) loginAs(u,$('#rem').checked); else { const er=$('#err'); er.hidden=false; er.textContent='パスワードが違います。もう一度入力してください。'; $('#pw').select(); } };
+    $('#back').onclick=()=>renderLogin();
+    $('#forgot').onclick=()=>{ $('#forgotBox').hidden=false; };
+    $('#delU').onclick=()=>{ const b=$('#delU'); if(b.dataset.c){ saveUsers(users().filter(x=>x.id!==u.id)); lsDel(ukey(u.id)); renderLogin(); } else { b.dataset.c='1'; b.textContent='本当に削除する（元に戻せません）'; } };
+  } else {
+    document.querySelectorAll('[data-u]').forEach(b=>b.onclick=()=>renderLogin(b.dataset.u));
+    $('#addU').onclick=()=>renderRegister();
+  }
+}
+function renderRegister(){
+  document.body.classList.add('locked');
+  const first=!users().length, legacy=first&&!!lsGet(LEGACY);
+  const f={cur:'',target:800,minutes:20};
+  const chips=(name,list,val,fmt)=>`<div class="chips" data-f="${name}">${list.map(v=>`<button type="button" class="chip" data-v="${v}" aria-pressed="${String(v)===String(val)}">${fmt?fmt(v):v}</button>`).join('')}</div>`;
+  $('#app').innerHTML=`<div class="auth pop">
+    <div class="auth-brand"><div class="logo">${IC.book}</div><div><div class="eyebrow">${esc(APP.sub)}</div><div class="brand">${esc(APP.title)}</div></div></div>
+    <form id="rf" class="card stack" style="gap:16px">
+      <div><h2>${first?'はじめに登録しましょう':'新しく登録'}</h2><p class="small muted" style="margin:4px 0 0">答えてもらった内容から、あなたに合った1日の量と出題を決めます。あとで設定から変えられます。</p></div>
+      <div class="stack" style="gap:6px"><label class="lbl" for="rn">ニックネーム</label><input class="search" id="rn" maxlength="16" required autocomplete="nickname" placeholder="例：がく"></div>
+      <div class="stack" style="gap:6px"><label class="lbl" for="rp">パスワード（4文字以上）</label><input class="search" id="rp" type="password" minlength="4" required autocomplete="new-password">
+        <input class="search" id="rp2" type="password" minlength="4" required autocomplete="new-password" placeholder="確認のためもう一度"></div>
+      ${APP.toeic?`<div class="stack" style="gap:8px"><span class="lbl">今のスコア</span>${chips('cur',CUR_BANDS.map((_,i)=>i),'',i=>CUR_BANDS[i])}</div>
+      <div class="stack" style="gap:8px"><span class="lbl">目標スコア</span>${chips('target',TARGETS,f.target,v=>v+'点')}</div>`:''}
+      <div class="stack" style="gap:6px"><label class="lbl" for="rd">次に受ける日（決まっていれば）</label><input class="search" id="rd" type="date" min="${dkey(Date.now())}"></div>
+      <div class="stack" style="gap:8px"><span class="lbl">1日に使える時間</span>${chips('minutes',MINUTES,f.minutes,v=>v+'分')}</div>
+      ${legacy?`<label class="check"><input type="checkbox" id="adopt" checked> この端末のこれまでの学習記録を引き継ぐ</label>`:''}
+      <div id="err" class="err" hidden></div>
+      <button class="btn primary block" type="submit">はじめる</button>
+      ${first?'':'<button class="btn ghost" type="button" id="cancel">← 戻る</button>'}
+    </form>
+    <p class="small muted" style="margin:0 2px">記録とパスワードは、この端末のこのブラウザの中にだけ保存されます。</p>
+  </div>`;
+  document.querySelectorAll('[data-f]').forEach(g=>g.onclick=e=>{ const b=e.target.closest('[data-v]'); if(!b) return;
+    g.querySelectorAll('.chip').forEach(c=>c.setAttribute('aria-pressed','false')); b.setAttribute('aria-pressed','true');
+    f[g.dataset.f]= g.dataset.f==='cur'? +b.dataset.v : +b.dataset.v; });
+  if($('#cancel')) $('#cancel').onclick=()=>renderLogin();
+  $('#rf').onsubmit=async e=>{ e.preventDefault();
+    const err=m=>{ const x=$('#err'); x.hidden=false; x.textContent=m; };
+    const name=$('#rn').value.trim(), pw=$('#rp').value;
+    if(!name) return err('ニックネームを入力してください。');
+    if(users().some(u=>u.name===name)) return err('そのニックネームはこの端末ですでに使われています。別の名前にしてください。');
+    if(pw.length<4) return err('パスワードは4文字以上にしてください。');
+    if(pw!==$('#rp2').value) return err('確認用のパスワードが一致しません。');
+    const id=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+    const salt=Math.random().toString(36).slice(2)+Date.now().toString(36);
+    const u={id,name,salt,hash:await hashPw(pw,salt),color:AV_COLORS[users().length%AV_COLORS.length],created:Date.now()};
+    let raw=null; if($('#adopt')?.checked){ try{ raw=JSON.parse(lsGet(LEGACY)); }catch(e){} }
+    DB=initDB(raw);
+    DB.profile={cur:APP.toeic&&f.cur!==''?f.cur:null, target:APP.toeic?f.target:null, testDate:$('#rd').value||'', minutes:f.minutes};
+    Object.assign(DB.cfg, suggestPlan(DB.profile));
+    lsSet(ukey(id),JSON.stringify(DB));
+    if(raw) lsDel(LEGACY);
+    saveUsers([...users(),u]);
+    loginAs(u,false);
+  };
+}
+function boot(){
+  const U=users(), id=ssGet(CURKEY)||lsGet(CURKEY), u=U.find(x=>x.id===id);
+  if(u) loginAs(u,!!lsGet(CURKEY)); else renderLogin();
+}
+
+document.addEventListener('keydown',e=>{
+  if(!SESSION||e.target.tagName==='INPUT') return;
+  const k=e.key.toLowerCase();
+  if(document.querySelector('.opt:not([disabled])')){ const i='abcd1234'.indexOf(k)%4; if('abcd1234'.includes(k)&&k) document.querySelectorAll('.opt')[i]?.click(); }
+  else if($('#next')&&(k==='enter'||k===' ')){ e.preventDefault(); $('#next').click(); }
+  else if($('#show')&&(k===' '||k==='enter')){ e.preventDefault(); $('#show').click(); }
+  else if(document.querySelector('[data-g]')&&'123'.includes(k)&&k){ document.querySelector(`[data-g="${+k-1}"]`).click(); }
+});
+boot();
+</script>
+
+</html>
